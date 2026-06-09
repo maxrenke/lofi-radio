@@ -1,14 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useIntl } from "react-intl";
-
-import {
-  CarouselProvider,
-  Slider,
-  Slide,
-  ButtonBack,
-  ButtonNext,
-} from "pure-react-carousel";
-import "pure-react-carousel/dist/react-carousel.es.css";
+import { FaPlay, FaPause, FaStepBackward, FaStepForward } from "react-icons/fa";
 
 function PlayerControls({
   onTogglePlay,
@@ -21,22 +13,11 @@ function PlayerControls({
 }) {
   const [searchInput, setSearchInput] = useState("");
   const [filteredCategories, setFilteredCategories] = useState(categories);
-  const [visibleSlides, setVisibleSlides] = useState(3);
-  const [stepsCategories, setStepsCategories] = useState(3);
   const intl = useIntl();
 
-  useEffect(() => {
-    const updateVisibleSlides = () => {
-      const screenWidth = window.innerWidth;
-      setVisibleSlides(screenWidth < 768 ? 2 : 3);
-      setStepsCategories(screenWidth < 768 ? 2 : 3);
-    };
-
-    updateVisibleSlides();
-    window.addEventListener("resize", updateVisibleSlides);
-
-    return () => window.removeEventListener("resize", updateVisibleSlides); // Cleanup on unmount
-  }, []);
+  // Stations can be YouTube (videoId) or HTML5 audio (audio url); use whichever
+  // is present as the unique identity.
+  const stationId = (s) => (s ? s.videoId || s.audio : undefined);
 
   const stations =
     categories.find((category) => category.name === selectedCategoryName)?.stations || [];
@@ -68,9 +49,10 @@ function PlayerControls({
     setSearchInput("");
     setFilteredCategories(categories);
   };
+
   const changeStation = (direction) => {
     const currentIndex = stations.findIndex(
-      (station) => station.videoId === currentStation.videoId
+      (station) => stationId(station) === stationId(currentStation)
     );
     const nextIndex =
       direction === "next"
@@ -89,33 +71,20 @@ function PlayerControls({
         placeholder={intl.formatMessage({ id: "SearchCategory" })}
       />
       {filteredCategories.length > 0 ? (
-        <CarouselProvider
-          naturalSlideWidth={100}
-          naturalSlideHeight={125}
-          totalSlides={filteredCategories.length}
-          visibleSlides={visibleSlides}
-          infinite={true}
-          step={stepsCategories}
-          className="carousel-container">
-          <ButtonBack className="button-back">{"<"}</ButtonBack>
-          <Slider>
-            {filteredCategories.map((category, index) => (
-              <Slide
-                className="my-slide"
-                index={index}
-                key={index}>
-                <button
-                  onClick={() => handleSelectCategory(category.name)}
-                  className={
-                    category.name === selectedCategoryName ? "selected-category" : ""
-                  }>
-                  {category.name}
-                </button>
-              </Slide>
-            ))}
-          </Slider>
-          <ButtonNext className="button-next">{">"}</ButtonNext>
-        </CarouselProvider>
+        <div className="category-pills">
+          {filteredCategories.map((category) => (
+            <button
+              key={category.name}
+              onClick={() => handleSelectCategory(category.name)}
+              className={
+                category.name === selectedCategoryName
+                  ? "category-pill selected-category"
+                  : "category-pill"
+              }>
+              {category.name}
+            </button>
+          ))}
+        </div>
       ) : (
         <div className="no-results">No results found.</div>
       )}
@@ -124,13 +93,13 @@ function PlayerControls({
       <h3 className="title-cat-stat">{intl.formatMessage({ id: "stations" })}</h3>
 
       <div className="stations-container">
-        {stations.map((station, index) => (
+        {stations.map((station, index) =>
           index % 2 === 0 ? (
             <div className="station-row" key={index}>
               <button
                 onClick={() => onStationChange(station)}
                 className={
-                  station.videoId === currentStation.videoId
+                  stationId(station) === stationId(currentStation)
                     ? "btn-station active-station"
                     : "btn-station"
                 }>
@@ -139,6 +108,10 @@ function PlayerControls({
                   src={station.picture}
                   alt={station.name}
                   width={24}
+                  onError={(e) => {
+                    e.currentTarget.onerror = null;
+                    e.currentTarget.src = "lofi-girl.webp";
+                  }}
                 />
                 {station.name}
               </button>
@@ -148,7 +121,7 @@ function PlayerControls({
                 <button
                   onClick={() => onStationChange(stations[index + 1])}
                   className={
-                    stations[index + 1].videoId === currentStation.videoId
+                    stationId(stations[index + 1]) === stationId(currentStation)
                       ? "btn-station active-station"
                       : "btn-station"
                   }>
@@ -157,41 +130,51 @@ function PlayerControls({
                     src={stations[index + 1].picture}
                     alt={stations[index + 1].name}
                     width={24}
+                    onError={(e) => {
+                      e.currentTarget.onerror = null;
+                      e.currentTarget.src = "lofi-girl.webp";
+                    }}
                   />
                   {stations[index + 1].name}
                 </button>
               )}
             </div>
           ) : null
-        ))}
+        )}
       </div>
+
+      {/* Now playing indicator */}
+      {currentStation && (
+        <div className={`now-playing ${isPlaying ? "is-playing" : ""}`}>
+          <img
+            className="now-playing-art"
+            src={currentStation.picture}
+            alt=""
+            onError={(e) => {
+              e.currentTarget.onerror = null;
+              e.currentTarget.src = "lofi-girl.webp";
+            }}
+          />
+          <div className="now-playing-info">
+            <span className="now-playing-label">
+              {isPlaying && <span className="pulsing-circle" />}
+              {isPlaying ? "Now Playing" : "Paused"}
+            </span>
+            <span className="now-playing-name">{currentStation.name}</span>
+          </div>
+        </div>
+      )}
 
       {/* Play/Pause Button */}
       <div className="pause-play-buttons">
-        <button onClick={() => changeStation("prev")}>
-          <img
-            className="previous-button"
-            src="previous.svg"
-            alt="Previous button"
-            width={20}
-          />
+        <button onClick={() => changeStation("prev")} aria-label="Previous">
+          <FaStepBackward />
         </button>
-        <button onClick={onTogglePlay}>
-          <img
-            className={isPlaying ? "pause-button" : "play-button"}
-            src={isPlaying ? "pause.svg" : "play.svg"}
-            alt={isPlaying ? "Pause" : "Play"}
-            width={20}
-          />
+        <button onClick={onTogglePlay} aria-label={isPlaying ? "Pause" : "Play"}>
+          {isPlaying ? <FaPause /> : <FaPlay />}
         </button>
-        <button onClick={() => changeStation("next")}>
-          {" "}
-          <img
-            className="next-button"
-            src="next.svg"
-            alt="next-button"
-            width={20}
-          />{" "}
+        <button onClick={() => changeStation("next")} aria-label="Next">
+          <FaStepForward />
         </button>
       </div>
     </div>

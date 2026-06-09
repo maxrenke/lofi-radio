@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Helmet } from "react-helmet";
 import { useIntl } from "react-intl";
 import AudioPlayer from "./Components/AudioPlayer";
@@ -28,6 +28,16 @@ function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isFullScreen, setIsFullScreen] = useState(false);
   const [isAppVisible, setIsAppVisible] = useState(true);
+
+  // Background selection (lifted here so the <video> is rendered declaratively
+  // by React — otherwise re-renders would reset DOM changes and hide it).
+  const [backgrounds, setBackgrounds] = useState([]);
+  const [selectedBg, setSelectedBg] = useState(
+    localStorage.getItem("selectedBackgroundName") || "None"
+  );
+  const bgVideoRef = useRef(null);
+  const bgUrl = backgrounds.find((b) => b.name === selectedBg)?.url;
+  const bgIsVideo = /\.(mp4|webm)$/i.test(bgUrl || "");
 
   const hideApp = () => setIsAppVisible(false);
   const showApp = () => setIsAppVisible(true);
@@ -66,7 +76,7 @@ function App() {
   }, [background]);
 
   useEffect(() => {
-    const storedTheme = localStorage.getItem("theme") || "light";
+    const storedTheme = localStorage.getItem("theme") || "dark";
     setTheme(storedTheme);
   }, []);
 
@@ -75,28 +85,69 @@ function App() {
       .then((response) => response.json())
       .then((data) => {
         setCategories(data.categories);
-        if (data.categories.length > 0) {
-          setSelectedCategoryName(data.categories[0].name);
-          if (data.categories[0].stations.length > 0) {
-            setCurrentStation(data.categories[0].stations[0]);
-            setIsPlaying(true);
-          }
+        if (data.categories.length === 0) return;
+
+        setSelectedCategoryName(data.categories[0].name);
+
+        // Restore the last played station, but only if it still exists in the
+        // current station list — IDs rotate, so a saved station may be gone.
+        const lastStation = JSON.parse(localStorage.getItem("lastStation"));
+        const idOf = (s) => (s ? s.videoId || s.audio : undefined);
+        const stillExists =
+          lastStation &&
+          idOf(lastStation) &&
+          data.categories.some((cat) =>
+            cat.stations.some((s) => idOf(s) === idOf(lastStation))
+          );
+
+        // Select a station but do NOT auto-play; wait for the user to hit play.
+        if (stillExists) {
+          setCurrentStation(lastStation);
+        } else if (data.categories[0].stations.length > 0) {
+          setCurrentStation(data.categories[0].stations[0]);
         }
       });
-  }, []);
-
-  useEffect(() => {
-    const lastStation = JSON.parse(localStorage.getItem("lastStation"));
-    if (lastStation) {
-      setCurrentStation(lastStation);
-      setIsPlaying(true);
-    }
   }, []);
 
   useEffect(() => {
     const savedFavorites = JSON.parse(localStorage.getItem("favorites")) || [];
     setFavorites(savedFavorites);
   }, []);
+
+  // Load the list of available backgrounds.
+  useEffect(() => {
+    fetch("/backgroundImages.json")
+      .then((res) => res.json())
+      .then((data) => setBackgrounds(data))
+      .catch(() => {});
+  }, []);
+
+  // Apply the selected background: image -> body background, video -> <video>,
+  // and dim the panel overlay accordingly.
+  useEffect(() => {
+    localStorage.setItem("selectedBackgroundName", selectedBg);
+    const root = document.documentElement;
+    if (!bgUrl || selectedBg === "None") {
+      document.body.style.backgroundImage = "none";
+      root.style.setProperty("--app-background-opacity", "0.8");
+    } else if (bgIsVideo) {
+      document.body.style.backgroundImage = "none";
+      root.style.setProperty("--app-background-opacity", "0.5");
+    } else {
+      document.body.style.backgroundImage = `url(${bgUrl})`;
+      root.style.setProperty("--app-background-opacity", "0.3");
+    }
+  }, [selectedBg, bgUrl, bgIsVideo]);
+
+  // Ensure the background video is muted (so autoplay is allowed) and playing.
+  useEffect(() => {
+    const v = bgVideoRef.current;
+    if (bgIsVideo && v) {
+      v.muted = true;
+      v.load();
+      v.play().catch(() => {});
+    }
+  }, [bgUrl, bgIsVideo]);
 
   const handleStationChange = (newStation) => {
     setCurrentStation(newStation);
@@ -134,6 +185,17 @@ function App() {
 
   return (
     <>
+      {bgIsVideo && (
+        <video
+          ref={bgVideoRef}
+          className="bg-video"
+          src={bgUrl}
+          autoPlay
+          muted
+          loop
+          playsInline
+        />
+      )}
       <Helmet>
         <html lang={language} />
         <title>{intl.formatMessage({ id: "title" })}</title>
@@ -196,22 +258,14 @@ function App() {
           <Footer />
         </header>
 
-        <div className="now-playing">
-          {currentStation ? (
-            <div className="circle-container">
-              <div className="playing-text">
-                {intl.formatMessage({ id: "nowPlaying" })} {currentStation.name}
-              </div>
-              <div className="pulsing-circle"></div>
-            </div>
-          ) : (
-            <div>{intl.formatMessage({ id: "loadingStationInfo" })}</div>
-          )}
-        </div>
 
         <div className="top-container-buttons">
           <div className="background-container">
-            <BackgroundSelector />
+            <BackgroundSelector
+              value={selectedBg}
+              options={backgrounds}
+              onChange={setSelectedBg}
+            />
           </div>
           <button
             onClick={toggleTheme}

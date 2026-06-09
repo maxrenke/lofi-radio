@@ -11,8 +11,11 @@ const Footer = () => {
           <img
             className="kofi-logo"
             src="/support_me_on_kofi_blue.webp"
-            alt="support me on kofi joan tomas"
+            alt="Support me on Ko-fi"
             loading="eager"
+            onError={(e) => {
+              e.currentTarget.style.display = "none";
+            }}
           />
         </a>
       </p>

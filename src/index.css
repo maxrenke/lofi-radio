@@ -1,44 +1,66 @@
+/* ===========================================================================
+   Lofi Radio — refreshed UI
+   Modern glassmorphism panel, soft indigo/violet accent, rounded controls.
+   Class names are preserved from the original markup.
+   =========================================================================== */
+
 :root {
-  /* Light theme colors */
-  --background-color: #ffffff;
-  --text-color: #000000;
+  /* Brand accent */
+  --accent: #8b7cff;
+  --accent-2: #c06cff;
+  --accent-grad: linear-gradient(135deg, #8b7cff 0%, #c06cff 100%);
+  --accent-soft: rgba(139, 124, 255, 0.18);
+  --ring: rgba(139, 124, 255, 0.55);
+
+  --radius: 18px;
+  --radius-sm: 12px;
+  --transition: 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Light theme defaults */
+  --background-color: rgba(255, 255, 255, 0.62);
+  --text-color: #1c1b22;
+  --text-muted: #5a5866;
+  --surface: rgba(255, 255, 255, 0.55);
+  --surface-hover: rgba(255, 255, 255, 0.85);
+  --border: rgba(0, 0, 0, 0.08);
 }
 
 [data-theme="dark"] {
-  /* Dark theme colors */
-  --background-color: #1a1a1a86;
-  --background-color-button: #1a1a1a;
-  --text-color: #ffffff;
+  --background-color: rgba(22, 20, 30, 0.55);
+  --background-color-button: rgba(255, 255, 255, 0.06);
+  --text-color: #f3f1fb;
+  --text-muted: #b4b0c6;
+  --surface: rgba(255, 255, 255, 0.06);
+  --surface-hover: rgba(255, 255, 255, 0.14);
+  --border: rgba(255, 255, 255, 0.1);
+  --input-bg: rgba(255, 255, 255, 0.07);
+  --a-color: var(--accent);
   --botones-filtro: 1;
-  --input-bg: #1a1a1a;
-  --a-color: #646cff;
 }
 
 [data-theme="light"] {
-  /* Dark theme colors */
-  --background-color: #7c7c7c86;
-  --background-color-button: #c3c1c1;
-  --text-color: #000000;
+  --background-color: rgba(255, 255, 255, 0.66);
+  --background-color-button: rgba(0, 0, 0, 0.04);
+  --text-color: #1c1b22;
+  --text-muted: #5a5866;
+  --surface: rgba(255, 255, 255, 0.7);
+  --surface-hover: #ffffff;
+  --border: rgba(0, 0, 0, 0.08);
+  --input-bg: rgba(0, 0, 0, 0.05);
+  --a-color: #6a4bff;
   --botones-filtro: 0;
-  --input-bg: #c3c1c1;
-  --a-color: #000000;
 }
 
-.body {
-  background-color: var(--background-color);
-  color: var(--text-color);
+* {
+  box-sizing: border-box;
 }
-
-
 
 html,
 body {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.1;
+  line-height: 1.4;
   font-weight: 400;
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #c0c0c0;
+  color: var(--text-color);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -47,25 +69,85 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
+  background-attachment: fixed;
 }
 
-.app {
+/* Base color goes on <html> so it paints BEHIND the z-index:-1 bg video.
+   <body> must stay transparent or it would cover the video. */
+html {
+  background-color: #14121b;
+}
+
+body {
   display: flex;
-  justify-content: start;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  padding: 14px;
+  background-color: transparent;
+}
+
+.body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+/* full-screen looping video background layer */
+.bg-video {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* ---------- main glass panel ---------- */
+.app {
+  position: relative;
+  display: flex;
+  justify-content: flex-start;
   align-items: center;
   flex-direction: column;
-  border-radius: 10px;
+  gap: 6px;
+  border-radius: var(--radius);
   background-color: var(--background-color);
-  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-  padding: 5px 60px 100px;
-  margin: 0px 20px;
-  width: 60vw;
-  max-width: 700px;
-  height: 92vh;
+  -webkit-backdrop-filter: blur(22px) saturate(140%);
+  backdrop-filter: blur(22px) saturate(140%);
+  border: 1px solid var(--border);
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.45);
+  padding: 16px 28px 20px;
+  margin: auto;
+  width: min(660px, 94vw);
+  max-height: calc(100vh - 28px);
+  overflow-y: auto;
+  scrollbar-width: none; /* hide scrollbar (Firefox) */
+}
+
+/* dim background image behind the panel content */
+.app::before {
+  content: "";
+  display: block;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, var(--app-background-opacity, 0.55));
+  z-index: 0;
+}
+
+.app > * {
+  position: relative;
+  z-index: 1;
+}
+
+.app::-webkit-scrollbar {
+  display: none; /* hide scrollbar (Chromium/Edge/Safari) */
 }
 
 .app2 {
-  height: 8vh;
+  height: auto;
+  padding-bottom: 22px;
 }
 
 .colappse-body {
@@ -76,77 +158,339 @@ body {
   flex-direction: column;
 }
 
+.collapsed {
+  display: none;
+}
 
 .body-container {
   position: relative;
-  z-index: 2000000;
+  z-index: 2;
 }
 
-.app::before {
-  content: "";
-  display: block;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, var(--app-background-opacity, 0.8));
-}
-
+/* ---------- header ---------- */
 .top-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: row;
-  gap: 10px;
-  z-index: 22;
+  gap: 12px;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.main-title {
+  text-align: center;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  background: var(--accent-grad);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 2px 0;
+}
+
+h1 {
+  line-height: 1.1;
 }
 
 .top-container-buttons {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: row;
-  gap: 10px;
-  z-index: 22;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin: 6px 0 2px;
 }
 
-.collapsed {
-  display: none;
+.background-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 0;
+}
+
+/* ---------- buttons (base) ---------- */
+button {
+  color: var(--text-color);
+  background-color: var(--surface);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  padding: 0.55em 1em;
+  font-size: 0.95em;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  transition: transform var(--transition), background-color var(--transition),
+    border-color var(--transition), box-shadow var(--transition);
+}
+
+button:hover {
+  background-color: var(--surface-hover);
+  border-color: var(--ring);
+  transform: translateY(-1px);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+button:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--ring);
+}
+
+/* icon-only header buttons become neat squares */
+.top-container-buttons > button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  font-size: 15px;
+}
+
+.selector-bg-img {
+  border-radius: var(--radius-sm);
+  padding: 8px 12px;
+  color: var(--text-color);
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  font-family: inherit;
+  cursor: pointer;
+  transition: border-color var(--transition), background-color var(--transition);
+}
+.selector-bg-img:hover {
+  border-color: var(--ring);
+}
+
+/* Native dropdown options render on an OS surface; force readable colors. */
+.selector-bg-img option {
+  background-color: #1f1d2b;
+  color: #f3f1fb;
+}
+
+/* ---------- player controls block ---------- */
+.player-controls {
   position: relative;
-  z-index: 23242423;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  z-index: 2;
 }
 
-.top-container button {
-  font-size: 16px;
+.title-cat-stat {
+  margin: 2px 0 0;
+  align-self: center;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
 }
 
 .player-controls input {
-  border-radius: 10px;
-  padding: 10px;
-  border: none;
-  margin-bottom: 10px;
+  width: 100%;
+  max-width: 420px;
+  align-self: center;
+  border-radius: var(--radius-sm);
+  padding: 9px 14px;
+  border: 1px solid var(--border);
   background-color: var(--input-bg);
-}
-
-.slideInner___2mfX9 {
-  text-align: center;
-}
-
-.now-playing {
-  z-index: 99999;
-  border-radius: 8px;
-  border: 1px solid transparent;
-  font-size: 1em;
-  font-weight: 500;
+  color: var(--text-color);
   font-family: inherit;
-  background-color: var(--background-color-button) !important;
-  transition: border-color 0.25s;
+  font-size: 0.95em;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+.player-controls input::placeholder {
+  color: var(--text-muted);
+}
+.player-controls input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--ring);
+}
+
+/* ---------- category pills ---------- */
+.category-pills {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+}
+
+.category-pill {
+  border-radius: 999px;
+  padding: 6px 13px !important;
+  font-size: 0.85em;
+  white-space: nowrap;
+  background-color: var(--surface);
+}
+
+.selected-category {
+  background: var(--accent-grad) !important;
+  color: #fff !important;
+  border-color: transparent !important;
+  box-shadow: 0 6px 18px rgba(139, 124, 255, 0.45);
+}
+
+.no-results {
+  color: var(--text-muted);
+  font-size: 0.9em;
+}
+
+/* ---------- station list ---------- */
+.stations-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  gap: 7px;
+}
+
+.station-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+  margin: 0;
+}
+
+.btn-station {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  text-align: left;
+  gap: 8px;
+  width: 50%;
+  padding: 7px 11px;
+  border-radius: var(--radius-sm);
+  background-color: var(--surface);
+  font-size: 0.88em;
+  line-height: 1.2;
+  overflow: hidden;
+}
+.btn-station:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+
+.station-picture {
+  width: 28px;
+  height: 28px;
+  object-fit: cover;
+  border-radius: 50%;
+  flex-shrink: 0;
+  border: 1px solid var(--border);
+}
+
+.active-station {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent), 0 8px 22px rgba(139, 124, 255, 0.35);
+}
+
+/* ---------- transport buttons (prev / play / next) ---------- */
+.pause-play-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+  margin-top: 2px;
+}
+
+.pause-play-buttons button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  padding: 0;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 16px;
+}
+
+/* center play/pause button = accent */
+.pause-play-buttons button:nth-child(2) {
+  width: 56px;
+  height: 56px;
+  background: var(--accent-grad);
+  border-color: transparent;
+  box-shadow: 0 10px 26px rgba(139, 124, 255, 0.5);
+  font-size: 20px;
+}
+.pause-play-buttons button:nth-child(2):hover {
+  filter: brightness(1.07);
+  transform: translateY(-2px);
+}
+
+/* ---------- now playing ---------- */
+.now-playing {
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  max-width: 360px;
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background-color: var(--surface);
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.now-playing.is-playing {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent), 0 8px 22px rgba(139, 124, 255, 0.3);
+}
+
+.now-playing-art {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  object-fit: cover;
+  flex-shrink: 0;
+  border: 1px solid var(--border);
+}
+
+.now-playing-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.now-playing-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-muted);
+}
+
+.now-playing-name {
+  font-size: 0.95em;
+  font-weight: 600;
+  color: var(--text-color);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .playing-text {
   color: var(--text-color);
-  padding: .5em;
+  padding: 0.5em;
 }
 
 .circle-container {
@@ -156,237 +500,94 @@ body {
 }
 
 .pulsing-circle {
-  width: 12px;
-  height: 12px;
-  background-color: rgb(191, 0, 0);
+  width: 9px;
+  height: 9px;
+  background-color: #ff4d6d;
   border-radius: 50%;
-  margin-right: 10px;
+  flex-shrink: 0;
   animation: pulse 2.5s infinite;
-  box-shadow: rgb(191, 0, 0, 0.4) 0px 2px 10px;
-
+  box-shadow: 0 0 0 0 rgba(255, 77, 109, 0.5);
 }
 
 @keyframes pulse {
   0% {
     transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(255, 77, 109, 0.45);
   }
-
-  50% {
-    transform: scale(1.15);
+  70% {
+    transform: scale(1.1);
+    box-shadow: 0 0 0 8px rgba(255, 77, 109, 0);
   }
-
   100% {
     transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(255, 77, 109, 0);
   }
 }
 
-button {
-  color: var(--text-color);
-  background-color: var(--background-color-button) !important;
+.red-circle {
+  display: inline-block;
+  margin-left: 10px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #ff4d6d;
+  animation: pulse 2.5s infinite;
 }
 
-.selector-bg-img {
-  border-radius: 5px;
-  padding: 5px;
-  color: var(--text-color);
-  background-color: var(--background-color-button) !important;
-}
-
-
-.main-title {
-  text-align: center;
-  font-size: 20px;
-
-}
-
-.player-controls {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  gap: 15px;
-  width: 100%;
+/* ---------- footer / kofi ---------- */
+.container-footer {
   z-index: 2;
 }
-
-.pause-play-buttons {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-}
-
-.stations-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-}
-
-.station-row {
-  display: flex;
-  justify-content: space-between;
-  width: 80%;
-  margin-bottom: 5px;
-}
-
-.btn-station {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: row;
-  text-align: center;
-  width: 48%;
-  margin-bottom: 5px;
-}
-
-.station-picture {
-  width: 25px;
-  margin-right: 8px;
-  border-radius: 50px;
-}
-
 .p-footer {
   margin: 0;
   text-decoration: none;
-  color: white;
-  border-radius: 10px;
 }
-
-.kofi-logo {
-  width: 140px;
-}
-
-.active-station {
-  border: 0.1px solid #fff;
-  box-shadow: 0 4px 15px rgba(0, 47, 255, 0.8);
-}
-
 .link-footer {
   font-weight: 500;
   font-size: 12px;
   text-decoration: none !important;
+  color: var(--a-color);
 }
-
-.container-footer {
-  z-index: 2;
-}
-
-.background-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  margin: 20px;
-}
-
-
-body {
-  display: flex;
-  justify-content: start;
-  align-items: center;
-  flex-direction: column;
-  height: 105vh;
-  margin: 0;
-  padding-top: 25px;
-
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
+.kofi-logo {
+  width: 130px;
   border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
+  transition: transform var(--transition);
+}
+.kofi-logo:hover {
+  transform: translateY(-2px);
 }
 
-.category-selector>button {
-  margin: 4px;
+a {
+  color: var(--a-color);
 }
 
-.carousel-container {
-  position: relative;
-  width: 100%;
-
-}
-
-
-.stations-carousel-container {
-  position: relative;
-  width: 100%;
-}
-
-.button-back {
-  left: -50px;
-  top: 20px;
-}
-
-.button-next {
-  right: -50px;
-  top: 20px;
-}
-
-.button-back,
-.button-next {
-  position: absolute;
-  transform: translateY(-50%);
-  border: none;
-  cursor: pointer;
-}
-
-.slideHorizontal___1NzNV {
-  float: left;
-  padding-bottom: 70px !important;
-}
-
-
-.my-slide>div>button {
-  width: 90%;
-  padding: 10px !important;
-}
-
-.button-back,
-.button-next {
-  z-index: 1;
-}
-
-.title-cat-stat {
-  margin: 0;
-}
-
+/* ---------- modal ---------- */
 .modal-overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.8);
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 3;
+  z-index: 100;
 }
 
 .modal-content {
   background-color: var(--background-color);
-  padding: 20px;
-  border-radius: 5px;
-  z-index: 3;
-  width: 30%;
+  -webkit-backdrop-filter: blur(24px) saturate(140%);
+  backdrop-filter: blur(24px) saturate(140%);
+  border: 1px solid var(--border);
+  padding: 26px;
+  border-radius: var(--radius);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  z-index: 101;
+  width: min(440px, 90%);
   display: flex;
-  justify-content: left;
   flex-direction: column;
-  align-items: end;
+  align-items: flex-end;
+  gap: 6px;
 }
 
 .texto-description {
@@ -401,144 +602,57 @@ button {
   width: 100%;
 }
 
+/* ---------- floating show-app button ---------- */
 .show-app-button,
 .hide-app-button {
   position: fixed;
-  top: 10px;
-  right: 10px;
-  background-color: #333;
+  top: 16px;
+  right: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  background: var(--accent-grad);
   color: #fff;
-  padding: 10px;
   border: none;
-  border-radius: 5px;
+  border-radius: 50%;
   cursor: pointer;
+  box-shadow: 0 10px 26px rgba(139, 124, 255, 0.5);
   z-index: 1000;
 }
-
-.show-app-button {
-  background-color: #1a1a1a !important;
-  top: 5%;
-  right: 5%;
-  transform: translate(50%, -50%);
-}
-
-
-.red-circle {
-  display: inline-block;
-  margin-left: 10px;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background-color: red;
-  animation: heartbeat 5s infinite;
+.show-app-button:hover {
+  filter: brightness(1.08);
 }
 
 .hidden {
   display: none;
 }
 
-.selected-category {
-  border: 1px solid white;
-}
-
-@keyframes heartbeat {
-  0% {
-    transform: scale(1);
-  }
-
-  25% {
-    transform: scale(1.5);
-  }
-
-  50% {
-    transform: scale(1);
-  }
-
-  75% {
-    transform: scale(1.5);
-  }
-
-  100% {
-    transform: scale(1);
-  }
-}
-
-button:hover {
-  border-color: #646cff;
-}
-
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-.previous-button,
-.next-button,
-.pause-button,
-.play-button {
-  filter: invert(var(--botones-filtro));
-}
-
-@media only screen and (max-width: 600px) {
-
-  .main-title {
-    font-size: 12px;
-  }
-
-  .top-container button {
-    font-size: 12px;
-  }
-
-  .top-container-buttons {
-    margin-bottom: 8px;
-    display: block;
-  }
-
-  .top-container-buttons button {
-    font-size: 12px;
-    margin: 4px;
-  }
-
+/* ---------- responsive ---------- */
+@media only screen and (max-width: 768px) {
   .app {
-    width: 60vw;
+    width: 90vw;
+    max-width: none;
+    padding: 18px 20px 56px;
   }
-
-  .app2 {
-    height: 14vh;
+  .main-title {
+    font-size: 18px;
   }
-
-  .player-controls {
-    gap: 10px;
+  .btn-station {
+    font-size: 0.82em;
   }
-
-  button {
-    border-radius: 8px;
-    border: 1px solid transparent;
-    padding: 0.4em 1em;
-    font-size: 0.7em;
-  }
-
   .modal-content {
-    width: 85%;
-    padding: 10px;
-  }
-
-  .now-playing {
-    width: 120%;
-  }
-
-  .kofi-logo {
-    width: 120px;
+    width: 90%;
+    padding: 18px;
   }
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
+@media only screen and (max-width: 420px) {
+  .station-row {
+    flex-direction: column;
   }
-
-  button {
-    background-color: #f9f9f9;
+  .btn-station {
+    width: 100%;
   }
 }

@@ -22,3 +22,12 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Local backups / scratch
+*.backup
+*.bak
+
+# Background video loops are Mixkit stock — their license forbids
+# redistributing the raw files, so we don't commit them to the repo.
+# Run scripts/fetch-backgrounds.sh to download them locally.
+public/*.mp4

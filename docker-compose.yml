@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  lofi-radio:
+    build: .
+    container_name: lofi-radio-app
+    ports:
+      - "6969:80"  # Expose port 3000 on host, map to port 80 in container
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+    volumes:
+      # Optional: Mount custom nginx config if you want to modify it
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      # C89.5 on-demand shows, served read-only at /c895/
+      - /DATA/Media/Music/C895:/usr/share/nginx/html/c895:ro
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:80"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s

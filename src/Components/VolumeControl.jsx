@@ -1,10 +1,11 @@
 import React, { useState } from "react";
+import { FaVolumeUp, FaVolumeMute } from "react-icons/fa";
 import "./VolumeControl.css";
 
 function VolumeControl({ setVolume }) {
-  const [volume, setVolumeState] = useState(100);
+  const [volume, setVolumeState] = useState(50);
   const [isMuted, setIsMuted] = useState(false);
-  const [prevVolume, setPrevVolume] = useState(100); // Add state to remember the previous volume
+  const [prevVolume, setPrevVolume] = useState(50); // Add state to remember the previous volume
 
   const handleVolumeChange = (event) => {
     const newVolume = event.target.value;
@@ -33,13 +34,9 @@ function VolumeControl({ setVolume }) {
       <div className="sound-off-on-buttons">
         <button
           className="boton-volumen"
-          onClick={toggleMute}>
-          <img
-            className={isMuted ? "off-volume" : "on-volume"}
-            src={isMuted ? "icon-off.svg" : "icon-on.svg"}
-            alt={isMuted ? "Muted" : "Unmuted"}
-            width={16}
-          />
+          onClick={toggleMute}
+          aria-label={isMuted ? "Unmute" : "Mute"}>
+          {isMuted ? <FaVolumeMute /> : <FaVolumeUp />}
         </button>
       </div>
       <input

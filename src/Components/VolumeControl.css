@@ -1,47 +1,53 @@
 .volume-control {
   position: relative;
-  width: 180px;
-  margin: 20px;
-  padding: 10px 15px;
-  padding-right: 50px;
-  background-color: #1A1A1A;
-  border-radius: 10px;
+  width: 190px;
+  margin: 6px auto 0;
+  padding: 8px 50px 8px 12px;
+  background-color: var(--surface, rgba(255, 255, 255, 0.06));
+  border: 1px solid var(--border, rgba(255, 255, 255, 0.1));
+  border-radius: 14px;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: row;
+  gap: 10px;
 }
 
-.off-volume,
-.on-volume {
-  filter: invert(100%);
+.boton-volumen {
+  color: #fff;
+  font-size: 15px;
 }
-
-
 
 .pause-button,
 .play-button {
   margin-top: 1px;
 }
 
-.sound-off-on-buttons {}
-
 .boton-volumen {
-  background-color: rgba(0, 47, 255, 0.8);
-  padding: 5px;
-  margin-right: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border-radius: 50%;
+  background: var(--accent-grad, linear-gradient(135deg, #8b7cff, #c06cff)) !important;
+  border: none;
+  flex-shrink: 0;
+}
+.boton-volumen:hover {
+  filter: brightness(1.08);
 }
 
 .volume-slider {
-  width: 100%;
+  flex: 1;
+  height: 6px;
   -webkit-appearance: none;
   appearance: none;
-  background: #ddd;
+  background: rgba(255, 255, 255, 0.22);
   outline: none;
-  opacity: 0.7;
-  transition: opacity .2s;
   border-radius: 30px;
-  box-shadow: 0px 0px 2px 3px rgba(0, 47, 255, 1);
+  transition: opacity 0.2s;
 }
 
 .volume-slider:hover {
@@ -51,26 +57,35 @@
 .volume-slider::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 10px;
-  height: 10px;
-  background: rgba(0, 47, 255, 0.8);
+  width: 15px;
+  height: 15px;
+  background: #fff;
+  border: 3px solid var(--accent, #8b7cff);
   cursor: pointer;
-  border-radius: 30px;
+  border-radius: 50%;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
 }
 
 .volume-slider::-moz-range-thumb {
-  width: 20px;
-  height: 10px;
-  background: rgba(0, 47, 255, 0.8);
+  width: 14px;
+  height: 14px;
+  background: #fff;
+  border: 3px solid var(--accent, #8b7cff);
   cursor: pointer;
+  border-radius: 50%;
 }
 
 .volume-label {
   position: absolute;
-  top: 12px;
+  top: 50%;
   right: 10px;
-  background: rgba(0, 47, 255, 0.8);
-  padding: 2px 4px;
-  border-radius: 5px;
-  color: white;
+  transform: translateY(-50%);
+  min-width: 26px;
+  text-align: center;
+  background: var(--accent-grad, linear-gradient(135deg, #8b7cff, #c06cff));
+  padding: 2px 6px;
+  border-radius: 6px;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
 }

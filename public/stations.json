@@ -4,9 +4,24 @@
       "name": "Lofi",
       "stations": [
         {
-          "name": "Lofi Girl",
+          "name": "Lofi Girl 📚",
           "picture": "lofi-girl.webp",
-          "videoId": "jfKfPfyJRdk"
+          "videoId": "X4VbdwhkE10"
+        },
+        {
+          "name": "Lofi Girl - Sleep 💤",
+          "picture": "lofi-girl.webp",
+          "videoId": "JD-kMIpDfnY"
+        },
+        {
+          "name": "Lofi Girl - Sad ☔",
+          "picture": "lofi-girl.webp",
+          "videoId": "CwPCy1GLS38"
+        },
+        {
+          "name": "Lofi Girl - Asian ⛩️",
+          "picture": "lofi-girl.webp",
+          "videoId": "1Tl2FtV06qo"
         },
         {
           "name": "Chillhop Music",
@@ -36,27 +51,82 @@
       ]
     },
     {
+      "name": "C89.5",
+      "stations": [
+        {
+          "name": "C89.5 Live 📻",
+          "picture": "c895.webp",
+          "audio": "https://knhc-ice.streamguys1.com/live"
+        },
+        {
+          "name": "Push the Tempo (Latest)",
+          "picture": "c895-push-the-tempo.webp",
+          "audio": "/c895/c895_push_the_tempo/latest.mp3"
+        },
+        {
+          "name": "PowerMix (Latest)",
+          "picture": "c895-powermix.webp",
+          "audio": "/c895/c895_powermix/latest.mp3"
+        },
+        {
+          "name": "Cafe Chill (Latest)",
+          "picture": "c895-cafe-chill.webp",
+          "audio": "/c895/c895_cafe_chill/latest.mp3"
+        }
+      ]
+    },
+    {
       "name": "Jazz",
       "stations": [
+        {
+          "name": "Lofi Girl - Jazz Lofi 🎷",
+          "picture": "Piano-Jazz-Music.webp",
+          "videoId": "E2vONfzoyRI"
+        },
+        {
+          "name": "Lofi Girl - Relaxing Jazz 🌹",
+          "picture": "Cafe-Music-BGM.webp",
+          "videoId": "A8jDx9TLMQc"
+        },
+        {
+          "name": "Lofi Girl - Piano 🎹",
+          "picture": "Piano-Jazz-Music.webp",
+          "videoId": "N0snMcR6aaA"
+        },
         {
           "name": "Cafe Music BGM",
           "picture": "Cafe-Music-BGM.webp",
           "videoId": "Dx5qFachd3A"
         },
         {
-          "name": "Cozy Coffee Shop",
+          "name": "Coffee Shop Radio ☕",
           "picture": "Cozy-Coffee-Shop.webp",
-          "videoId": "JJq34sWY4GY"
+          "videoId": "mwPR8aizAyo"
         },
         {
           "name": "Piano Jazz Music",
           "picture": "Piano-Jazz-Music.webp",
           "videoId": "fTb6yJ7AlT8"
+        }
+      ]
+    },
+    {
+      "name": "Synth & Ambient",
+      "stations": [
+        {
+          "name": "Lofi Girl - Synth Ambient 🌌",
+          "picture": "synthwave-lofi.webp",
+          "videoId": "GSfT7H87zq4"
         },
         {
-          "name": "BGM channel",
-          "picture": "BGM-channel.webp",
-          "videoId": "Dx5qFachd3A"
+          "name": "Lofi Girl - Dark Ambient 🌃",
+          "picture": "chaos-aether.webp",
+          "videoId": "S_MOd40zlYU"
+        },
+        {
+          "name": "Lofi Girl - Sleep Ambient 💤",
+          "picture": "Healing-Energy-for-Soul.webp",
+          "videoId": "xORCbIptqcc"
         }
       ]
     },
@@ -64,14 +134,14 @@
       "name": "Rap/Hip Hop",
       "stations": [
         {
-          "name": "HIP HOP CLASSIC",
+          "name": "Classic Hip Hop Radio",
           "picture": "hip-hop-classics.webp",
-          "videoId": "D-zIdinmiD8"
+          "videoId": "GpcVy-UMahQ"
         },
         {
-          "name": "Best of Mix",
+          "name": "Boom Bap Radio",
           "picture": "Best-of-Mix.webp",
-          "videoId": "urikT3Act8w"
+          "videoId": "Oblb4xGO6k4"
         },
         {
           "name": "Rap Mafia",
@@ -94,9 +164,9 @@
           "videoId": "0V0SKiiFZMs"
         },
         {
-          "name": "Forest",
+          "name": "Forest Wildlife 🦌",
           "picture": "Forest.webp",
-          "videoId": "CRo2j7UmUvs"
+          "videoId": "F0GOOP82094"
         },
         {
           "name": "Fireplace",
@@ -114,7 +184,7 @@
       "name": "Synthwave",
       "stations": [
         {
-          "name": "Synthwave-lofi",
+          "name": "Synthwave Radio 🌌",
           "picture": "synthwave-lofi.webp",
           "videoId": "4xDzrJKXOOY"
         },
@@ -129,9 +199,9 @@
           "videoId": "qnStVGoIgBA"
         },
         {
-          "name": "The '80s Guy",
+          "name": "New Retro FM",
           "picture": "80sGuy.webp",
-          "videoId": "MGJWPha7rJw"
+          "videoId": "MRM806fH_jM"
         }
       ]
     },
@@ -149,9 +219,9 @@
           "videoId": "yGlB3GKfNBI"
         },
         {
-          "name": "Defected Records",
-          "picture": "DefectedRecords.webp",
-          "videoId": "0rmvjfMwnJc"
+          "name": "ChillYourMind Radio",
+          "picture": "depp-house-radio.webp",
+          "videoId": "NJyCwdWT80c"
         },
         {
           "name": "Tropical House Radio",
@@ -164,11 +234,6 @@
       "name": "Meditation",
       "stations": [
         {
-          "name": "Greenred Productions",
-          "picture": "GreenredProductions.webp",
-          "videoId": "iD6UA5pE4kk"
-        },
-        {
           "name": "Healing Energy for Soul",
           "picture": "Healing-Energy-for-Soul.webp",
           "videoId": "u3papaX85MA"
@@ -179,9 +244,14 @@
           "videoId": "_bLX5WfDQfM"
         },
         {
-          "name": "OM CHANT Lord Shiva",
-          "picture": "OMCHANTLordShiva.webp",
-          "videoId": "85g90mN9D7w"
+          "name": "Lofi Girl - Classical 🎻",
+          "picture": "Open-Heart-Music.webp",
+          "videoId": "jXAEIWcGXwE"
+        },
+        {
+          "name": "Lofi Girl - Chill Guitar 🎸",
+          "picture": "GreenredProductions.webp",
+          "videoId": "E_XmwjgRLz8"
         }
       ]
     },
@@ -199,11 +269,6 @@
           "videoId": "V1eqPTRAW6s"
         },
         {
-          "name": "GravityGroovy",
-          "picture": "GravityGroovy.webp",
-          "videoId": "V1eqPTRAW6s"
-        },
-        {
           "name": "chao's_aether",
           "picture": "chaos-aether.webp",
           "videoId": "1sZO_uKSwOk"
@@ -213,11 +278,6 @@
     {
       "name": "Techno",
       "stations": [
-        {
-          "name": "Trippy Cat Music",
-          "picture": "chaos-aether.webp",
-          "videoId": "pRfWToc8uxQ"
-        },
         {
           "name": "Art of Minimal Techno",
           "picture": "Art-of-Minimal.webp",
@@ -232,6 +292,11 @@
           "name": "Dark Monkey Music",
           "picture": "Dark-Monkey-Music.webp",
           "videoId": "i3sD9iUSiaU"
+        },
+        {
+          "name": "Techno & Progressive House",
+          "picture": "Trippy-Cat-Music.webp",
+          "videoId": "2Vx90igLtiM"
         }
       ]
     },
@@ -239,24 +304,24 @@
       "name": "Reggaeton",
       "stations": [
         {
-          "name": "Romantica Musica",
+          "name": "Latin Party Mix",
           "picture": "Fiesta-Latina-Mix.webp",
-          "videoId": "dE4xDQbS-9c"
+          "videoId": "Yab1E61p10o"
         },
         {
-          "name": "Amor Musica",
+          "name": "Best Reggaeton Mega Mix",
           "picture": "REGGAETON-VIEJO.webp",
-          "videoId": "XpiugqCq9t0"
+          "videoId": "S-lE2kNfE48"
         },
         {
-          "name": "Reggaetón Lento",
+          "name": "Latina Mix",
           "picture": "Pop-Latino.webp",
-          "videoId": "Z2UbXcN1IlQ"
+          "videoId": "WG2HR5rvfO0"
         },
         {
-          "name": "Romantica Musica 2",
+          "name": "Mix Música Variada",
           "picture": "Fiesta-Latina-Mix2.webp",
-          "videoId": "JrqOrB5hUvQ"
+          "videoId": "LCSlSB7uFgE"
         }
       ]
     }
