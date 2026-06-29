@@ -1,10 +1,14 @@
-docker stop lofi-radio-app 2>/dev/null || true
-docker rm lofi-radio-app 2>/dev/null || true
+#!/usr/bin/env bash
+#
+# rebuild.sh — rebuild and restart the lofi-radio container via Docker Compose.
+# Compose applies the nginx.conf mount, the C895 media mount, restart policy,
+# and healthcheck — so always go through it rather than a bare `docker run`.
 
-docker build --no-cache -t lofi-radio-lofi-radio .
+set -e
+cd "$(dirname "${BASH_SOURCE[0]}")"
 
-docker run -d \
-  --name lofi-radio-app \
-  -p 6969:80 \
-  -v /DATA/Media/Music/C895:/usr/share/nginx/html/c895 \
-  lofi-radio-lofi-radio
+if docker compose version >/dev/null 2>&1; then
+  docker compose up -d --build
+else
+  docker-compose up -d --build
+fi
