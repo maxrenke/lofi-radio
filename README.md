@@ -24,8 +24,15 @@ On top of the original React app:
   animated GIFs, via a hidden `<video>` layer.
 - **🔊 Dual-source player** — the player now supports **plain HTTP audio streams
   and MP3s** (HTML5 `<audio>`) alongside the original **YouTube** livestreams.
+- **⏱️ Seekable on-demand tracks** — finite-length mp3s get a **scrub bar** with
+  elapsed / remaining time, and the **playback position is remembered** per
+  track, so closing the app or switching away and back resumes in place.
+- **🎚️ Player controls** — a **now-playing** indicator, **volume presets**
+  (Mute / 1 / 5 / 10 / 50 / 100), 50% default volume, and no autoplay.
 - **📻 C89.5 (KNHC) integration** — the station's live stream plus on-demand
   *Push the Tempo*, *PowerMix*, and *Cafe Chill* episodes.
+- **📡 Live-stream tabs** — a generator that turns any channel's currently-live
+  streams into a category (with thumbnails as icons), e.g. the Fantasy Lofi tab.
 - **🩺 Station health check** — a script that flags dead/removed YouTube streams
   (they rotate video IDs and break over time).
 - **🧹 Curated & repaired station list** — broken stations replaced, duplicates
@@ -48,6 +55,9 @@ docker compose up -d --build
 Then open **http://localhost:6969** (or `http://<server-ip>:6969`).
 
 > The included `deploy.sh` wraps the same steps with environment checks.
+
+To rebuild after changes, re-run `docker compose up -d --build` (or `./rebuild.sh`,
+which wraps it). Always go through Compose so the `nginx.conf` and C895 mounts apply.
 
 ### Configuration
 
@@ -94,6 +104,8 @@ The **C89.5** category contains:
   container at `/c895/`. They rely on a companion **C895 on-demand downloader**
   that fetches each week's show into `/DATA/Media/Music/C895/<show>/` and
   maintains a `latest.mp3` symlink pointing at the newest episode.
+- On-demand shows are mp3s, so they get the **scrub bar + resume-position**
+  behavior; the live stream (being a stream) does not.
 
 If you don't run the downloader, remove or edit the on-demand mount in
 `docker-compose.yml` and drop those three stations from `public/stations.json`:
