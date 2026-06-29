@@ -545,6 +545,11 @@ button:focus-visible {
   text-overflow: ellipsis;
 }
 
+.now-playing-error {
+  font-size: 11px;
+  color: #ff6b81;
+}
+
 .playing-text {
   color: var(--text-color);
   padding: 0.5em;

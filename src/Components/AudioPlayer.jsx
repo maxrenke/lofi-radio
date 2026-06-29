@@ -6,12 +6,9 @@ import VolumeControl from "./VolumeControl";
  * or via a plain HTML5 <audio> element (station.audio — a live stream
  * URL or an on-demand mp3). Only one source is active at a time.
  *
- * For finite-length audio (the on-demand mp3s, not live streams) it shows a
- * seek bar and remembers the playback position per track in localStorage.
+ * Finite-length audio (on-demand mp3s) also gets a seek bar and remembers its
+ * position per track. The OS/browser Media Session is wired up for both.
  */
-// A valid video id used only to initialize the YT player. Creating the player
-// with an empty videoId can prevent onReady from firing, which would leave the
-// player null and silent. This seed is never auto-played.
 const YT_SEED_VIDEO_ID = "jfKfPfyJRdk";
 
 const posKey = (url) => "lofi:trackpos:" + url;
@@ -26,20 +23,35 @@ const fmtTime = (s) => {
   return (h > 0 ? h + ":" : "") + mm + ":" + String(sec).padStart(2, "0");
 };
 
-function AudioPlayer({ station, isPlaying }) {
+const artworkFor = (station) => {
+  const pic = station.picture || "";
+  return pic.startsWith("http") ? pic : `${window.location.origin}/${pic}`;
+};
+
+function AudioPlayer({
+  station,
+  isPlaying,
+  volume,
+  onVolumeChange,
+  onPlay,
+  onPause,
+  onPrev,
+  onNext,
+  onStationError,
+  onPlaying,
+}) {
   const [ytPlayer, setYtPlayer] = useState(null);
   const audioRef = useRef(null);
-  const volumeRef = useRef(50); // 0-100, shared between both players
+  const volumeRef = useRef(volume);
   const lastSaveRef = useRef(0);
+  const lastSecRef = useRef(-1);
 
   const [duration, setDuration] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
 
   const isAudio = !!station.audio;
-  // Only finite-length audio (mp3s) is seekable — live streams report Infinity.
   const seekable = isAudio && isFinite(duration) && duration > 0;
 
-  // Persist current position for the active mp3 (skips live streams).
   const savePos = (t) => {
     if (!isAudio) return;
     const a = audioRef.current;
@@ -47,6 +59,13 @@ function AudioPlayer({ station, isPlaying }) {
     if (typeof t !== "number" || !isFinite(t) || t <= 0) return;
     localStorage.setItem(posKey(station.audio), String(t));
   };
+
+  // Keep latest volume available to async callbacks (onReady) without re-deps.
+  useEffect(() => {
+    volumeRef.current = volume;
+    if (audioRef.current) audioRef.current.volume = volume / 100;
+    if (ytPlayer && ytPlayer.setVolume) ytPlayer.setVolume(volume);
+  }, [volume, ytPlayer]);
 
   // Load the YouTube IFrame API once and build the (hidden) player.
   useEffect(() => {
@@ -63,6 +82,10 @@ function AudioPlayer({ station, isPlaying }) {
             event.target.setVolume(volumeRef.current);
             setYtPlayer(event.target);
           },
+          onStateChange: (e) => {
+            if (e.data === window.YT.PlayerState.PLAYING) onPlaying && onPlaying();
+          },
+          onError: () => onStationError && onStationError(),
         },
       });
     };
@@ -71,7 +94,6 @@ function AudioPlayer({ station, isPlaying }) {
       buildPlayer();
       return;
     }
-
     if (!document.querySelector('script[src*="youtube.com/iframe_api"]')) {
       const script = document.createElement("script");
       script.src = "https://www.youtube.com/iframe_api";
@@ -89,12 +111,10 @@ function AudioPlayer({ station, isPlaying }) {
   // React to station changes.
   useEffect(() => {
     if (isAudio) {
-      // Stop YouTube, drive the <audio> element.
       if (ytPlayer && ytPlayer.pauseVideo) ytPlayer.pauseVideo();
       const a = audioRef.current;
       if (a) {
         if (a.getAttribute("src") !== station.audio) {
-          // Save the outgoing track's position before swapping sources.
           const oldSrc = a.getAttribute("src");
           if (oldSrc && isFinite(a.duration) && a.currentTime > 0) {
             localStorage.setItem(posKey(oldSrc), String(a.currentTime));
@@ -103,13 +123,12 @@ function AudioPlayer({ station, isPlaying }) {
           a.load();
           setDuration(0);
           setCurrentTime(0);
+          lastSecRef.current = -1;
         }
         a.volume = volumeRef.current / 100;
         if (isPlaying) a.play().catch(() => {});
       }
     } else {
-      // Stop <audio>, drive YouTube. Save the outgoing track's position first
-      // (onPause can't — isAudio is already false by the time it fires).
       const a = audioRef.current;
       if (a) {
         const src = a.getAttribute("src");
@@ -145,6 +164,44 @@ function AudioPlayer({ station, isPlaying }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isPlaying, isAudio, ytPlayer]);
 
+  // Media Session: metadata + playback state (changes only with station/play).
+  useEffect(() => {
+    if (!("mediaSession" in navigator)) return;
+    try {
+      navigator.mediaSession.metadata = new window.MediaMetadata({
+        title: station.name,
+        artist: "Lofi Radio",
+        artwork: [{ src: artworkFor(station), sizes: "512x512" }],
+      });
+    } catch (_) {
+      /* MediaMetadata unsupported */
+    }
+    navigator.mediaSession.playbackState = isPlaying ? "playing" : "paused";
+  }, [station, isPlaying]);
+
+  // Media Session: action handlers (rebind when the app's callbacks change).
+  useEffect(() => {
+    if (!("mediaSession" in navigator)) return;
+    const set = (action, handler) => {
+      try {
+        navigator.mediaSession.setActionHandler(action, handler);
+      } catch (_) {
+        /* action unsupported */
+      }
+    };
+    set("play", () => onPlay && onPlay());
+    set("pause", () => onPause && onPause());
+    set("previoustrack", () => onPrev && onPrev());
+    set("nexttrack", () => onNext && onNext());
+    set("seekto", (d) => {
+      const a = audioRef.current;
+      if (a && d.seekTime != null && isFinite(a.duration)) {
+        a.currentTime = d.seekTime;
+        setCurrentTime(d.seekTime);
+      }
+    });
+  }, [onPlay, onPause, onPrev, onNext]);
+
   // Save position when the tab/app is closed.
   useEffect(() => {
     const handler = () => {
@@ -155,12 +212,6 @@ function AudioPlayer({ station, isPlaying }) {
     return () => window.removeEventListener("beforeunload", handler);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isAudio, station.audio]);
-
-  const setVolume = (volume) => {
-    volumeRef.current = Number(volume);
-    if (audioRef.current) audioRef.current.volume = volumeRef.current / 100;
-    if (ytPlayer && ytPlayer.setVolume) ytPlayer.setVolume(volumeRef.current);
-  };
 
   const onLoadedMetadata = () => {
     const a = audioRef.current;
@@ -180,7 +231,23 @@ function AudioPlayer({ station, isPlaying }) {
   const onTimeUpdate = () => {
     const a = audioRef.current;
     if (!a) return;
-    setCurrentTime(a.currentTime);
+    // Re-render at most ~once per second (the UI only shows whole seconds).
+    const whole = Math.floor(a.currentTime);
+    if (whole !== lastSecRef.current) {
+      lastSecRef.current = whole;
+      setCurrentTime(a.currentTime);
+      if ("mediaSession" in navigator && navigator.mediaSession.setPositionState && isFinite(a.duration)) {
+        try {
+          navigator.mediaSession.setPositionState({
+            duration: a.duration,
+            position: Math.min(a.currentTime, a.duration),
+            playbackRate: 1,
+          });
+        } catch (_) {
+          /* ignore */
+        }
+      }
+    }
     const now = Date.now();
     if (now - lastSaveRef.current > 3000) {
       savePos(a.currentTime);
@@ -215,13 +282,15 @@ function AudioPlayer({ station, isPlaying }) {
         </div>
       )}
 
-      <VolumeControl setVolume={setVolume} />
+      <VolumeControl volume={volume} onVolumeChange={onVolumeChange} />
 
       <audio
         ref={audioRef}
         preload="metadata"
         onLoadedMetadata={onLoadedMetadata}
         onTimeUpdate={onTimeUpdate}
+        onPlaying={() => onPlaying && onPlaying()}
+        onError={() => onStationError && onStationError()}
         onPause={() => savePos(audioRef.current?.currentTime)}
         onEnded={() => localStorage.removeItem(posKey(station.audio))}
       />

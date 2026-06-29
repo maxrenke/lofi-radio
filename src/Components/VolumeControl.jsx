@@ -11,24 +11,24 @@ const PRESETS = [
   { label: "100", value: 100 },
 ];
 
-function VolumeControl({ setVolume }) {
-  const [volume, setVolumeState] = useState(50);
-  const [prevVolume, setPrevVolume] = useState(50); // last non-zero volume
+// Controlled component: volume (0-100) and onVolumeChange come from the parent
+// so the slider stays in sync with keyboard shortcuts and persistence.
+function VolumeControl({ volume, onVolumeChange }) {
+  const [prevVolume, setPrevVolume] = useState(volume || 50); // last non-zero
   const isMuted = Number(volume) === 0;
 
-  const applyVolume = (v) => {
+  const apply = (v) => {
     const n = Number(v);
-    setVolumeState(n);
-    setVolume(n);
     if (n !== 0) setPrevVolume(n);
+    onVolumeChange(n);
   };
 
   const toggleMute = () => {
     if (isMuted) {
-      applyVolume(prevVolume || 50);
+      apply(prevVolume || 50);
     } else {
       setPrevVolume(Number(volume));
-      applyVolume(0);
+      onVolumeChange(0);
     }
   };
 
@@ -48,7 +48,7 @@ function VolumeControl({ setVolume }) {
           min="0"
           max="100"
           value={volume}
-          onChange={(e) => applyVolume(e.target.value)}
+          onChange={(e) => apply(e.target.value)}
           className="volume-slider"
         />
         <div className="volume-label">{volume}</div>
@@ -61,7 +61,7 @@ function VolumeControl({ setVolume }) {
             className={
               "volume-preset" + (Number(volume) === p.value ? " active" : "")
             }
-            onClick={() => applyVolume(p.value)}
+            onClick={() => apply(p.value)}
             aria-label={`Set volume ${p.label}`}>
             {p.label}
           </button>

@@ -15,6 +15,9 @@ import { IoMdOpen } from "react-icons/io";
 import ModalInfo from "./Components/ModalInfo";
 import { useLanguage } from "./LanguageContext";
 
+// Unique identity for a station: YouTube videoId or audio URL.
+const idOf = (s) => (s ? s.videoId || s.audio : undefined);
+
 function App() {
   const intl = useIntl();
   const { language, setLanguage } = useLanguage();
@@ -28,6 +31,15 @@ function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isFullScreen, setIsFullScreen] = useState(false);
   const [isAppVisible, setIsAppVisible] = useState(true);
+
+  // Volume (0-100) lifted here so keyboard shortcuts + persistence can drive it.
+  const [volume, setVolume] = useState(() => {
+    const v = parseInt(localStorage.getItem("volume"), 10);
+    return Number.isFinite(v) ? v : 50;
+  });
+  // Transient "stream unavailable" notice + consecutive-error guard.
+  const [streamError, setStreamError] = useState(null);
+  const errorCountRef = useRef(0);
 
   // Background selection (lifted here so the <video> is rendered declaratively
   // by React — otherwise re-renders would reset DOM changes and hide it).
@@ -87,12 +99,9 @@ function App() {
         setCategories(data.categories);
         if (data.categories.length === 0) return;
 
-        setSelectedCategoryName(data.categories[0].name);
-
         // Restore the last played station, but only if it still exists in the
         // current station list — IDs rotate, so a saved station may be gone.
         const lastStation = JSON.parse(localStorage.getItem("lastStation"));
-        const idOf = (s) => (s ? s.videoId || s.audio : undefined);
         const stillExists =
           lastStation &&
           idOf(lastStation) &&
@@ -101,10 +110,16 @@ function App() {
           );
 
         // Select a station but do NOT auto-play; wait for the user to hit play.
-        if (stillExists) {
-          setCurrentStation(lastStation);
-        } else if (data.categories[0].stations.length > 0) {
-          setCurrentStation(data.categories[0].stations[0]);
+        const chosen = stillExists ? lastStation : data.categories[0].stations[0];
+        if (chosen) {
+          setCurrentStation(chosen);
+          // Show the tab that actually contains the cued station.
+          const cat = data.categories.find((c) =>
+            c.stations.some((s) => idOf(s) === idOf(chosen))
+          );
+          setSelectedCategoryName(cat ? cat.name : data.categories[0].name);
+        } else {
+          setSelectedCategoryName(data.categories[0].name);
         }
       });
   }, []);
@@ -157,6 +172,72 @@ function App() {
 
   const onTogglePlay = () => {
     setIsPlaying((prevIsPlaying) => !prevIsPlaying);
+  };
+
+  // Move to the previous/next station within the currently selected category.
+  const changeStation = (direction) => {
+    const cat = categories.find((c) => c.name === selectedCategoryName);
+    const list = cat?.stations || [];
+    if (!list.length || !currentStation) return;
+    let i = list.findIndex((s) => idOf(s) === idOf(currentStation));
+    if (i === -1) i = 0;
+    const n =
+      direction === "next"
+        ? (i + 1) % list.length
+        : (i - 1 + list.length) % list.length;
+    handleStationChange(list[n]);
+  };
+
+  // Persist volume.
+  useEffect(() => {
+    localStorage.setItem("volume", String(volume));
+  }, [volume]);
+
+  // Keyboard shortcuts (ignored while typing in the search/select fields).
+  useEffect(() => {
+    const onKey = (e) => {
+      const tag = (e.target.tagName || "").toLowerCase();
+      if (tag === "input" || tag === "select" || tag === "textarea") return;
+      if (e.key === " " || e.code === "Space") {
+        // If a button is focused, let it handle Space (avoids double-toggle).
+        if (tag === "button") return;
+        e.preventDefault();
+        onTogglePlay();
+      } else if (e.key === "ArrowRight") {
+        e.preventDefault();
+        changeStation("next");
+      } else if (e.key === "ArrowLeft") {
+        e.preventDefault();
+        changeStation("prev");
+      } else if (e.key === "ArrowUp") {
+        e.preventDefault();
+        setVolume((v) => Math.min(100, v + 5));
+      } else if (e.key === "ArrowDown") {
+        e.preventDefault();
+        setVolume((v) => Math.max(0, v - 5));
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [categories, selectedCategoryName, currentStation]);
+
+  // Called by the player when a (YouTube) stream fails to load. Surface a
+  // notice and auto-skip to the next station, capped to avoid infinite skips.
+  const onStationError = () => {
+    if (errorCountRef.current < 3) {
+      errorCountRef.current += 1;
+      setStreamError("Stream unavailable — skipping…");
+      setTimeout(() => changeStation("next"), 1500);
+    } else {
+      setStreamError("Stream unavailable — try another station");
+    }
+  };
+
+  // Called when playback actually starts; clears any error state.
+  const onPlaying = () => {
+    errorCountRef.current = 0;
+    if (streamError) setStreamError(null);
   };
 
   const toggleFavorite = (station) => {
@@ -326,11 +407,19 @@ function App() {
             categories={categories}
             selectedCategoryName={selectedCategoryName}
             onSelectCategory={setSelectedCategoryName}
+            streamError={streamError}
           />
           <AudioPlayer
             station={currentStation}
-            onStationChange={handleStationChange}
             isPlaying={isPlaying}
+            volume={volume}
+            onVolumeChange={setVolume}
+            onPlay={() => setIsPlaying(true)}
+            onPause={() => setIsPlaying(false)}
+            onPrev={() => changeStation("prev")}
+            onNext={() => changeStation("next")}
+            onStationError={onStationError}
+            onPlaying={onPlaying}
           />
         </main>
       </div>

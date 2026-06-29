@@ -10,6 +10,7 @@ function PlayerControls({
   categories,
   selectedCategoryName,
   onSelectCategory,
+  streamError,
 }) {
   const [searchInput, setSearchInput] = useState("");
   const [filteredCategories, setFilteredCategories] = useState(categories);
@@ -161,6 +162,7 @@ function PlayerControls({
               {isPlaying ? "Now Playing" : "Paused"}
             </span>
             <span className="now-playing-name">{currentStation.name}</span>
+            {streamError && <span className="now-playing-error">⚠ {streamError}</span>}
           </div>
         </div>
       )}
