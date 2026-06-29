@@ -2,52 +2,71 @@ import React, { useState } from "react";
 import { FaVolumeUp, FaVolumeMute } from "react-icons/fa";
 import "./VolumeControl.css";
 
+const PRESETS = [
+  { label: "Mute", value: 0 },
+  { label: "1", value: 1 },
+  { label: "5", value: 5 },
+  { label: "10", value: 10 },
+  { label: "50", value: 50 },
+  { label: "100", value: 100 },
+];
+
 function VolumeControl({ setVolume }) {
   const [volume, setVolumeState] = useState(50);
-  const [isMuted, setIsMuted] = useState(false);
-  const [prevVolume, setPrevVolume] = useState(50); // Add state to remember the previous volume
+  const [prevVolume, setPrevVolume] = useState(50); // last non-zero volume
+  const isMuted = Number(volume) === 0;
 
-  const handleVolumeChange = (event) => {
-    const newVolume = event.target.value;
-    setVolumeState(newVolume); // Update the local component's volume
-    setVolume(newVolume); // This might be a prop function to update the volume in a parent component
-    setIsMuted(newVolume === "0");
-    if (newVolume !== "0") {
-      setPrevVolume(newVolume); // Remember the last non-zero volume
-    }
+  const applyVolume = (v) => {
+    const n = Number(v);
+    setVolumeState(n);
+    setVolume(n);
+    if (n !== 0) setPrevVolume(n);
   };
 
   const toggleMute = () => {
-    setIsMuted((prevIsMuted) => {
-      const newVolume = prevIsMuted ? prevVolume : "0"; // If currently muted, restore previous volume; otherwise, mute
-      setVolumeState(newVolume);
-      setVolume(newVolume); // Assuming setVolume is to communicate the volume change externally
-      if (!prevIsMuted) {
-        setPrevVolume(volume); // Save the current volume before muting
-      }
-      return !prevIsMuted;
-    });
+    if (isMuted) {
+      applyVolume(prevVolume || 50);
+    } else {
+      setPrevVolume(Number(volume));
+      applyVolume(0);
+    }
   };
 
   return (
-    <div className="volume-control">
-      <div className="sound-off-on-buttons">
-        <button
-          className="boton-volumen"
-          onClick={toggleMute}
-          aria-label={isMuted ? "Unmute" : "Mute"}>
-          {isMuted ? <FaVolumeMute /> : <FaVolumeUp />}
-        </button>
+    <div className="volume-control-wrap">
+      <div className="volume-control">
+        <div className="sound-off-on-buttons">
+          <button
+            className="boton-volumen"
+            onClick={toggleMute}
+            aria-label={isMuted ? "Unmute" : "Mute"}>
+            {isMuted ? <FaVolumeMute /> : <FaVolumeUp />}
+          </button>
+        </div>
+        <input
+          type="range"
+          min="0"
+          max="100"
+          value={volume}
+          onChange={(e) => applyVolume(e.target.value)}
+          className="volume-slider"
+        />
+        <div className="volume-label">{volume}</div>
       </div>
-      <input
-        type="range"
-        min="0"
-        max="100"
-        value={volume}
-        onChange={handleVolumeChange}
-        className="volume-slider"
-      />
-      <div className="volume-label">{volume}</div>
+
+      <div className="volume-presets">
+        {PRESETS.map((p) => (
+          <button
+            key={p.value}
+            className={
+              "volume-preset" + (Number(volume) === p.value ? " active" : "")
+            }
+            onClick={() => applyVolume(p.value)}
+            aria-label={`Set volume ${p.label}`}>
+            {p.label}
+          </button>
+        ))}
+      </div>
     </div>
   );
 }
