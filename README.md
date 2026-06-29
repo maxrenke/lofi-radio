@@ -123,6 +123,21 @@ category. Each station is **either** a YouTube stream **or** a direct audio URL:
 - `audio` → played via an HTML5 `<audio>` element (live streams or mp3s).
 - `picture` → a filename in `public/` (with a fallback if it fails to load).
 
+### Adding a channel's live streams (with thumbnails)
+
+`scripts/refresh_live_streams.py` scrapes a YouTube channel's `/streams` tab,
+keeps the ones that are **currently live**, and writes them into a category in
+`stations.json` using each stream's thumbnail as the icon:
+
+```bash
+python3 scripts/refresh_live_streams.py --channel @FantasyLofi --category "Fantasy Lofi" --insert-after C89.5
+# or: npm run refresh-streams -- --channel @FantasyLofi --category "Fantasy Lofi"
+```
+
+Re-running replaces the same-named category (handy on a cron to keep live
+streams current). If liveness can't be determined, it falls back to including
+every embeddable stream on the page. Rebuild afterward to apply.
+
 ### Checking for broken stations
 
 YouTube 24/7 "radio" streams rotate their video IDs, so stations go dead over

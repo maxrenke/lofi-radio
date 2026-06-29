@@ -8,7 +8,8 @@
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "check-stations": "bash scripts/check-stations.sh"
+    "check-stations": "bash scripts/check-stations.sh",
+    "refresh-streams": "python3 scripts/refresh_live_streams.py"
   },
   "dependencies": {
     "pure-react-carousel": "^1.30.1",

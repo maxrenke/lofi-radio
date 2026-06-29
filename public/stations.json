@@ -76,6 +76,36 @@
       ]
     },
     {
+      "name": "Fantasy Lofi",
+      "stations": [
+        {
+          "name": "chill gaming session - fantasy lofi radio 🎧",
+          "picture": "https://i.ytimg.com/vi/4CVJiLQkiGo/hqdefault.jpg",
+          "videoId": "4CVJiLQkiGo"
+        },
+        {
+          "name": "Fantasy Jazz Tavern 🎷",
+          "picture": "https://i.ytimg.com/vi/M4A-BHZVSS0/hqdefault.jpg",
+          "videoId": "M4A-BHZVSS0"
+        },
+        {
+          "name": "cozy campfire ambience radio 🔥",
+          "picture": "https://i.ytimg.com/vi/x96c3vJlNKk/hqdefault.jpg",
+          "videoId": "x96c3vJlNKk"
+        },
+        {
+          "name": "sleepy fantasy covers radio 😴",
+          "picture": "https://i.ytimg.com/vi/kVJ2PsxonxA/hqdefault.jpg",
+          "videoId": "kVJ2PsxonxA"
+        },
+        {
+          "name": "relaxing fantasy piano radio 🎹",
+          "picture": "https://i.ytimg.com/vi/qwHoTqDAicw/hqdefault.jpg",
+          "videoId": "qwHoTqDAicw"
+        }
+      ]
+    },
+    {
       "name": "Jazz",
       "stations": [
         {
@@ -322,6 +352,17 @@
           "name": "Mix Música Variada",
           "picture": "Fiesta-Latina-Mix2.webp",
           "videoId": "LCSlSB7uFgE"
+        }
+      ]
+        },
+    {
+      "name": "Halo",
+      "stations": [
+        {
+          "id": "halo_ce_menu",
+          "name": "Halo CE Main Menu",
+          "picture": "Halo.webp",
+          "videoId": "VLmoBgExnhU"
         }
       ]
     }
