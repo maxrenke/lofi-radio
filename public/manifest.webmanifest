@@ -1,0 +1,15 @@
+{
+  "name": "Lofi Radio",
+  "short_name": "Lofi Radio",
+  "description": "Self-hosted lo-fi, chill & electronic web radio",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#14121b",
+  "theme_color": "#14121b",
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}
