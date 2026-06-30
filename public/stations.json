@@ -47,6 +47,11 @@
           "name": "Rap Lofi",
           "picture": "raplofi.webp",
           "videoId": "0DztVOeomsk"
+        },
+        {
+          "name": "Work Lofi (10h)",
+          "picture": "https://i.ytimg.com/vi/JCKBaJDRMw4/hqdefault.jpg",
+          "audio": "/music/LoFi%20Girl/chill%20music%20for%20work%20%F0%9F%92%BC%20lofi%20beats%20to%20stay%20productive%20%5BJCKBaJDRMw4%5D.mp3"
         }
       ]
     },
@@ -76,7 +81,7 @@
       ]
     },
     {
-      "name": "Fantasy Lofi",
+      "name": "Game Lofi",
       "stations": [
         {
           "name": "chill gaming session - fantasy lofi radio 🎧",
@@ -102,6 +107,52 @@
           "name": "relaxing fantasy piano radio 🎹",
           "picture": "https://i.ytimg.com/vi/qwHoTqDAicw/hqdefault.jpg",
           "videoId": "qwHoTqDAicw"
+        },
+        {
+          "name": "World of Warcraft Lofi",
+          "picture": "https://i.ytimg.com/vi/eoHFwSsMbsw/hqdefault.jpg",
+          "audio": "/music/FantasyLofi/World%20of%20Warcraft%20but%20it%27s%20lofi%20beats%20~%20Vol.%201.mp3"
+        },
+        {
+          "name": "Halo Lofi",
+          "picture": "https://i.ytimg.com/vi/Cwoo7SisSHc/hqdefault.jpg",
+          "audio": "/music/FantasyLofi/Halo%20but%20it%27s%20lofi%20beats.mp3"
+        },
+        {
+          "name": "Pokémon Lofi",
+          "picture": "https://i.ytimg.com/vi/v5UC2ULk6vo/hqdefault.jpg",
+          "audio": "/music/FantasyLofi/Poke%CC%81mon%20but%20it%27s%20lofi%20beats.mp3"
+        },
+        {
+          "name": "Minecraft Lofi",
+          "picture": "https://i.ytimg.com/vi/qYtO03a_bKs/hqdefault.jpg",
+          "audio": "/music/FantasyLofi/Minecraft%20but%20it%27s%20lofi%20beats.mp3"
+        },
+        {
+          "name": "Lord of the Rings Lofi",
+          "picture": "https://i.ytimg.com/vi/d9YM_9CVmtc/hqdefault.jpg",
+          "audio": "/music/FantasyLofi/Lord%20of%20The%20Rings%20but%20it%27s%20lofi%20beats.mp3"
+        },
+        {
+          "name": "Path of Exile Lofi",
+          "picture": "https://i.ytimg.com/vi/rSDoXnslLsg/hqdefault.jpg",
+          "audio": "/music/FantasyLofi/Path%20of%20Exile%20but%20it%27s%20lofi%20beats.mp3"
+        },
+        {
+          "name": "Chilltendo Lofi",
+          "picture": "https://i.ytimg.com/vi/7YmNvCy30FU/hqdefault.jpg",
+          "audio": "/music/FantasyLofi/Chilltendo%20but%20it%27s%20lofi%20beats.mp3"
+        },
+        {
+          "name": "Christmas Lofi",
+          "picture": "https://i.ytimg.com/vi/XSXEaikz0Bc/hqdefault.jpg",
+          "audio": "/music/FantasyLofi/Christmas%20but%20it%27s%20lofi%20beats.mp3"
+        },
+        {
+          "id": "halo_ce_menu",
+          "name": "Halo CE Main Menu",
+          "picture": "Halo.webp",
+          "videoId": "VLmoBgExnhU"
         }
       ]
     },
@@ -137,26 +188,51 @@
           "name": "Piano Jazz Music",
           "picture": "Piano-Jazz-Music.webp",
           "videoId": "fTb6yJ7AlT8"
+        },
+        {
+          "name": "Jazz Lofi Mix (3h)",
+          "picture": "https://i.ytimg.com/vi/CBSlu_VMS9U/hqdefault.jpg",
+          "audio": "/music/LoFi%20Girl/jazz%20lofi%20mix%20%5B3%20hours%5D%20%F0%9F%8E%B7%20relaxing%20music%20to%20chill%E2%A7%B8study%20to%20%5BCBSlu_VMS9U%5D.mp3"
+        },
+        {
+          "name": "WDR Big Band — Birth of the Cool",
+          "picture": "https://i.ytimg.com/vi/L-wOH60M2Vg/hqdefault.jpg",
+          "audio": "/music/WDR%20Big%20Band/Alan%20Broadbent%20%26%20WDR%20BIG%20BAND%20-%20The%20Birth%20Of%20The%20Cool%20Kind%20of%20Blue.mp3"
+        },
+        {
+          "name": "WDR Big Band — Swing Swing Swing",
+          "picture": "https://i.ytimg.com/vi/WdUvGRcuTGk/hqdefault.jpg",
+          "audio": "/music/WDR%20Big%20Band/Bob%20Mintzer%20%26%20WDR%20BIG%20BAND%20-%20Swing%20Swing%20Swing.mp3"
+        },
+        {
+          "name": "WDR Big Band — Yellowjackets",
+          "picture": "https://i.ytimg.com/vi/ZvHF7ydY1Is/hqdefault.jpg",
+          "audio": "/music/WDR%20Big%20Band/WDR%20BIG%20BAND%20%26%20Yellowjackets%20-%20Full%20Concert.mp3"
         }
       ]
     },
     {
-      "name": "Synth & Ambient",
+      "name": "Synthwave",
       "stations": [
         {
-          "name": "Lofi Girl - Synth Ambient 🌌",
+          "name": "Synthwave Radio 🌌",
           "picture": "synthwave-lofi.webp",
-          "videoId": "GSfT7H87zq4"
+          "videoId": "4xDzrJKXOOY"
         },
         {
-          "name": "Lofi Girl - Dark Ambient 🌃",
-          "picture": "chaos-aether.webp",
-          "videoId": "S_MOd40zlYU"
+          "name": "Nightride FM",
+          "picture": "Nightride-FM.webp",
+          "videoId": "UedTcufyrHc"
         },
         {
-          "name": "Lofi Girl - Sleep Ambient 💤",
-          "picture": "Healing-Energy-for-Soul.webp",
-          "videoId": "xORCbIptqcc"
+          "name": "Starburst",
+          "picture": "Starburst.webp",
+          "videoId": "qnStVGoIgBA"
+        },
+        {
+          "name": "New Retro FM",
+          "picture": "80sGuy.webp",
+          "videoId": "MRM806fH_jM"
         }
       ]
     },
@@ -207,31 +283,11 @@
           "name": "Ocean Waves",
           "picture": "Ocean-Waves.webp",
           "videoId": "gf6SK0NObfI"
-        }
-      ]
-    },
-    {
-      "name": "Synthwave",
-      "stations": [
-        {
-          "name": "Synthwave Radio 🌌",
-          "picture": "synthwave-lofi.webp",
-          "videoId": "4xDzrJKXOOY"
         },
         {
-          "name": "Nightride FM",
-          "picture": "Nightride-FM.webp",
-          "videoId": "UedTcufyrHc"
-        },
-        {
-          "name": "Starburst",
-          "picture": "Starburst.webp",
-          "videoId": "qnStVGoIgBA"
-        },
-        {
-          "name": "New Retro FM",
-          "picture": "80sGuy.webp",
-          "videoId": "MRM806fH_jM"
+          "name": "4K Video Nature",
+          "picture": "4KVideoNature.webp",
+          "videoId": "_bLX5WfDQfM"
         }
       ]
     },
@@ -261,17 +317,27 @@
       ]
     },
     {
-      "name": "Meditation",
+      "name": "Ambient & Sleep",
       "stations": [
+        {
+          "name": "Lofi Girl - Synth Ambient 🌌",
+          "picture": "synthwave-lofi.webp",
+          "videoId": "GSfT7H87zq4"
+        },
+        {
+          "name": "Lofi Girl - Dark Ambient 🌃",
+          "picture": "chaos-aether.webp",
+          "videoId": "S_MOd40zlYU"
+        },
+        {
+          "name": "Lofi Girl - Sleep Ambient 💤",
+          "picture": "Healing-Energy-for-Soul.webp",
+          "videoId": "xORCbIptqcc"
+        },
         {
           "name": "Healing Energy for Soul",
           "picture": "Healing-Energy-for-Soul.webp",
           "videoId": "u3papaX85MA"
-        },
-        {
-          "name": "4K Video Nature",
-          "picture": "4KVideoNature.webp",
-          "videoId": "_bLX5WfDQfM"
         },
         {
           "name": "Lofi Girl - Classical 🎻",
@@ -352,17 +418,6 @@
           "name": "Mix Música Variada",
           "picture": "Fiesta-Latina-Mix2.webp",
           "videoId": "LCSlSB7uFgE"
-        }
-      ]
-    },
-    {
-      "name": "Halo",
-      "stations": [
-        {
-          "id": "halo_ce_menu",
-          "name": "Halo CE Main Menu",
-          "picture": "Halo.webp",
-          "videoId": "VLmoBgExnhU"
         }
       ]
     }
