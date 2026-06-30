@@ -2,6 +2,18 @@ import React, { useState, useEffect } from "react";
 import { useIntl } from "react-intl";
 import { FaPlay, FaPause, FaStepBackward, FaStepForward } from "react-icons/fa";
 
+// Secondary categories tucked behind an "Other" pill to keep the main ones
+// (Lofi, C89.5, Fantasy/Game Lofi, Jazz, Synthwave, Halo) prominent by default.
+const OTHER_CATEGORIES = [
+  "Rap/Hip Hop",
+  "Nature",
+  "House",
+  "Ambient & Sleep",
+  "Drum & Bass",
+  "Techno",
+  "Reggaeton",
+];
+
 function PlayerControls({
   onTogglePlay,
   isPlaying,
@@ -14,7 +26,14 @@ function PlayerControls({
 }) {
   const [searchInput, setSearchInput] = useState("");
   const [filteredCategories, setFilteredCategories] = useState(categories);
+  const [showOther, setShowOther] = useState(false);
   const intl = useIntl();
+
+  const isOther = (name) => OTHER_CATEGORIES.includes(name);
+  // Auto-expand "Other" if the active category lives in there (e.g. on reload).
+  useEffect(() => {
+    if (isOther(selectedCategoryName)) setShowOther(true);
+  }, [selectedCategoryName]);
 
   // Stations can be YouTube (videoId) or HTML5 audio (audio url); use whichever
   // is present as the unique identity.
@@ -71,24 +90,55 @@ function PlayerControls({
         onChange={handleSearchInputChange}
         placeholder={intl.formatMessage({ id: "SearchCategory" })}
       />
-      {filteredCategories.length > 0 ? (
-        <div className="category-pills">
-          {filteredCategories.map((category) => (
-            <button
-              key={category.name}
-              onClick={() => handleSelectCategory(category.name)}
-              className={
-                category.name === selectedCategoryName
-                  ? "category-pill selected-category"
-                  : "category-pill"
-              }>
-              {category.name}
-            </button>
-          ))}
-        </div>
-      ) : (
-        <div className="no-results">No results found.</div>
-      )}
+      {(() => {
+        const pill = (category) => (
+          <button
+            key={category.name}
+            onClick={() => handleSelectCategory(category.name)}
+            className={
+              category.name === selectedCategoryName
+                ? "category-pill selected-category"
+                : "category-pill"
+            }>
+            {category.name}
+          </button>
+        );
+
+        // While searching, show all matches flat (ignore the Other grouping).
+        if (searchInput.trim() !== "") {
+          return filteredCategories.length > 0 ? (
+            <div className="category-pills">{filteredCategories.map(pill)}</div>
+          ) : (
+            <div className="no-results">No results found.</div>
+          );
+        }
+
+        const primary = categories.filter((c) => !isOther(c.name));
+        const others = categories.filter((c) => isOther(c.name));
+        return (
+          <>
+            <div className="category-pills">
+              {primary.map(pill)}
+              {others.length > 0 && (
+                <button
+                  onClick={() => setShowOther((v) => !v)}
+                  aria-expanded={showOther}
+                  className={
+                    "category-pill category-pill-other" +
+                    (isOther(selectedCategoryName) ? " selected-category" : "")
+                  }>
+                  Other {showOther ? "▴" : "▾"}
+                </button>
+              )}
+            </div>
+            {showOther && others.length > 0 && (
+              <div className="category-pills category-pills-secondary">
+                {others.map(pill)}
+              </div>
+            )}
+          </>
+        );
+      })()}
 
       {/* Stations Display */}
       <h3 className="title-cat-stat">{intl.formatMessage({ id: "stations" })}</h3>

@@ -334,6 +334,20 @@ button:focus-visible {
   background-color: var(--surface);
 }
 
+/* Expanded "Other" sub-group sits in a subdued row below the main pills. */
+.category-pills-secondary {
+  margin-top: 6px;
+  padding-top: 8px;
+  border-top: 1px dashed var(--border);
+}
+.category-pills-secondary .category-pill {
+  font-size: 0.8em;
+  opacity: 0.92;
+}
+.category-pill-other {
+  font-weight: 600;
+}
+
 .selected-category {
   background: var(--accent-grad) !important;
   color: #fff !important;
