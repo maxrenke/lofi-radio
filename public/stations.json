@@ -81,6 +81,36 @@
       ]
     },
     {
+      "name": "Fantasy Lofi",
+      "stations": [
+        {
+          "name": "chill gaming session - fantasy lofi radio 🎧",
+          "picture": "https://i.ytimg.com/vi/4CVJiLQkiGo/hqdefault.jpg",
+          "videoId": "4CVJiLQkiGo"
+        },
+        {
+          "name": "Fantasy Jazz Tavern 🎷",
+          "picture": "https://i.ytimg.com/vi/M4A-BHZVSS0/hqdefault.jpg",
+          "videoId": "M4A-BHZVSS0"
+        },
+        {
+          "name": "cozy campfire ambience radio 🔥",
+          "picture": "https://i.ytimg.com/vi/x96c3vJlNKk/hqdefault.jpg",
+          "videoId": "x96c3vJlNKk"
+        },
+        {
+          "name": "sleepy fantasy covers radio 😴",
+          "picture": "https://i.ytimg.com/vi/kVJ2PsxonxA/hqdefault.jpg",
+          "videoId": "kVJ2PsxonxA"
+        },
+        {
+          "name": "relaxing fantasy piano radio 🎹",
+          "picture": "https://i.ytimg.com/vi/qwHoTqDAicw/hqdefault.jpg",
+          "videoId": "qwHoTqDAicw"
+        }
+      ]
+    },
+    {
       "name": "Game Lofi",
       "stations": [
         {
@@ -153,6 +183,21 @@
           "name": "Halo CE Main Menu",
           "picture": "Halo.webp",
           "videoId": "VLmoBgExnhU"
+        }
+      ]
+    },
+    {
+      "name": "Club",
+      "stations": [
+        {
+          "name": "CLUBPOP Vol. 1 — Adamusic",
+          "picture": "https://i.ytimg.com/vi/jU8ZYBTdSM0/hqdefault.jpg",
+          "audio": "/music/Adamusic/CLUBPOP%20VOL.%201%20%E2%A7%B8%E2%A7%B8%20Adamusic%20DJ%20Set%20%28Britney%20Spears%2C%20Lady%20Gaga%2C%20Charli%20xcx%2C%20Beyonc%C3%A9%2C%20Doja%20Cat%2C%20Kesha%29.mp3"
+        },
+        {
+          "name": "CLUBPOP Vol. 2 — Adamusic",
+          "picture": "https://i.ytimg.com/vi/Ip2oe5T5S78/hqdefault.jpg",
+          "audio": "/music/Adamusic/CLUBPOP%20VOL.%202%20%E2%A7%B8%E2%A7%B8%20Adamusic%20DJ%20Set%20%28Slayyyter%2C%20Britney%20Spears%2C%20Charli%20XCX%2C%20Beyonc%C3%A9%2C%20Ariana%20Grande%29.mp3"
         }
       ]
     },
