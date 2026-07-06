@@ -584,9 +584,40 @@ button:focus-visible {
   opacity: 0.9;
 }
 .tl-title {
+  flex: 1;
+  min-width: 0;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+}
+
+.tl-links {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+  font-size: 13px;
+}
+.tl-link {
+  display: inline-flex;
+  opacity: 0.55;
+  color: inherit;
+  transition: opacity var(--transition), color var(--transition);
+}
+.tl-item:hover .tl-link {
+  opacity: 0.85;
+}
+.tl-link:hover {
+  opacity: 1;
+}
+.tl-spotify:hover {
+  color: #1db954;
+}
+.tl-youtube:hover {
+  color: #ff3d3d;
+}
+.tl-item.active .tl-link {
+  opacity: 0.9;
 }
 
 /* ---------- now playing ---------- */

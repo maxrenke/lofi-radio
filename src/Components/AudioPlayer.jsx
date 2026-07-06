@@ -1,5 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
+import { FaSpotify, FaYoutube } from "react-icons/fa";
 import VolumeControl from "./VolumeControl";
+
+const searchUrl = (svc, q) =>
+  svc === "spotify"
+    ? "https://open.spotify.com/search/" + encodeURIComponent(q)
+    : "https://www.youtube.com/results?search_query=" + encodeURIComponent(q);
 
 /**
  * Plays a station either via the YouTube IFrame API (station.videoId)
@@ -336,6 +342,28 @@ function AudioPlayer({
                   onClick={() => seekTo(c.start)}>
                   <span className="tl-time">{fmtTime(c.start)}</span>
                   <span className="tl-title">{c.title}</span>
+                  {c.title && (
+                    <span className="tl-links">
+                      <a
+                        href={searchUrl("spotify", c.title)}
+                        target="_blank"
+                        rel="noreferrer"
+                        title="Search on Spotify"
+                        className="tl-link tl-spotify"
+                        onClick={(e) => e.stopPropagation()}>
+                        <FaSpotify />
+                      </a>
+                      <a
+                        href={searchUrl("youtube", c.title)}
+                        target="_blank"
+                        rel="noreferrer"
+                        title="Search on YouTube"
+                        className="tl-link tl-youtube"
+                        onClick={(e) => e.stopPropagation()}>
+                        <FaYoutube />
+                      </a>
+                    </span>
+                  )}
                 </li>
               ))}
             </ol>
