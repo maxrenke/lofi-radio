@@ -48,9 +48,13 @@ function AudioPlayer({
 
   const [duration, setDuration] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
+  const [chapters, setChapters] = useState([]);
+  const [chapterIdx, setChapterIdx] = useState(-1);
+  const [showTracklist, setShowTracklist] = useState(false);
 
   const isAudio = !!station.audio;
   const seekable = isAudio && isFinite(duration) && duration > 0;
+  const currentTrack = chapterIdx >= 0 ? chapters[chapterIdx]?.title || "" : "";
 
   const savePos = (t) => {
     if (!isAudio) return;
@@ -66,6 +70,27 @@ function AudioPlayer({
     if (audioRef.current) audioRef.current.volume = volume / 100;
     if (ytPlayer && ytPlayer.setVolume) ytPlayer.setVolume(volume);
   }, [volume, ytPlayer]);
+
+  // Fetch the chapter/tracklist sidecar for finite mp3s (e.g. C89.5 shows).
+  // Browsers don't expose ID3 chapters from <audio>, so we serve a JSON sidecar.
+  useEffect(() => {
+    setChapters([]);
+    setChapterIdx(-1);
+    setShowTracklist(false);
+    if (!isAudio || !/\.mp3$/i.test(station.audio)) return;
+    const url = station.audio.replace(/\.mp3$/i, ".chapters.json");
+    let cancelled = false;
+    fetch(url)
+      .then((r) => (r.ok ? r.json() : null))
+      .then((data) => {
+        if (!cancelled && Array.isArray(data) && data.length) setChapters(data);
+      })
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [station]);
 
   // Load the YouTube IFrame API once and build the (hidden) player.
   useEffect(() => {
@@ -164,20 +189,21 @@ function AudioPlayer({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isPlaying, isAudio, ytPlayer]);
 
-  // Media Session: metadata + playback state (changes only with station/play).
+  // Media Session: metadata + playback state. When a tracklist is present the
+  // current track becomes the title and the station name becomes the artist.
   useEffect(() => {
     if (!("mediaSession" in navigator)) return;
     try {
       navigator.mediaSession.metadata = new window.MediaMetadata({
-        title: station.name,
-        artist: "Lofi Radio",
+        title: currentTrack || station.name,
+        artist: currentTrack ? station.name : "Lofi Radio",
         artwork: [{ src: artworkFor(station), sizes: "512x512" }],
       });
     } catch (_) {
       /* MediaMetadata unsupported */
     }
     navigator.mediaSession.playbackState = isPlaying ? "playing" : "paused";
-  }, [station, isPlaying]);
+  }, [station, isPlaying, currentTrack]);
 
   // Media Session: action handlers (rebind when the app's callbacks change).
   useEffect(() => {
@@ -236,6 +262,15 @@ function AudioPlayer({
     if (whole !== lastSecRef.current) {
       lastSecRef.current = whole;
       setCurrentTime(a.currentTime);
+      // Current chapter = last one whose start time we've passed.
+      if (chapters.length) {
+        let idx = -1;
+        for (let i = 0; i < chapters.length; i++) {
+          if (a.currentTime >= chapters[i].start) idx = i;
+          else break;
+        }
+        setChapterIdx(idx); // React skips the re-render if unchanged
+      }
       if ("mediaSession" in navigator && navigator.mediaSession.setPositionState && isFinite(a.duration)) {
         try {
           navigator.mediaSession.setPositionState({
@@ -255,13 +290,14 @@ function AudioPlayer({
     }
   };
 
-  const onSeek = (e) => {
-    const v = Number(e.target.value);
+  const seekTo = (t) => {
     const a = audioRef.current;
-    if (a) a.currentTime = v;
-    setCurrentTime(v);
-    savePos(v);
+    if (a) a.currentTime = t;
+    setCurrentTime(t);
+    savePos(t);
   };
+
+  const onSeek = (e) => seekTo(Number(e.target.value));
 
   return (
     <div className="audio-player">
@@ -279,6 +315,31 @@ function AudioPlayer({
             aria-label="Seek"
           />
           <span className="track-time">-{fmtTime(Math.max(0, duration - currentTime))}</span>
+        </div>
+      )}
+
+      {chapters.length > 0 && (
+        <div className="tracklist-wrap">
+          <button
+            className="tracklist-current"
+            onClick={() => setShowTracklist((v) => !v)}
+            aria-expanded={showTracklist}>
+            <span className="tl-now">♪ {currentTrack || "—"}</span>
+            <span className="tl-caret">{showTracklist ? "▴" : "▾"}</span>
+          </button>
+          {showTracklist && (
+            <ol className="tracklist">
+              {chapters.map((c, i) => (
+                <li
+                  key={i}
+                  className={"tl-item" + (i === chapterIdx ? " active" : "")}
+                  onClick={() => seekTo(c.start)}>
+                  <span className="tl-time">{fmtTime(c.start)}</span>
+                  <span className="tl-title">{c.title}</span>
+                </li>
+              ))}
+            </ol>
+          )}
         </div>
       )}
 

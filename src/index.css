@@ -503,6 +503,92 @@ button:focus-visible {
   cursor: pointer;
 }
 
+/* ---------- tracklist (ID3 chapters for on-demand shows) ---------- */
+.tracklist-wrap {
+  width: 100%;
+  max-width: 360px;
+  margin: 6px auto 0;
+}
+
+.tracklist-current {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  width: 100%;
+  padding: 8px 12px !important;
+  border-radius: var(--radius-sm);
+  background-color: rgba(18, 16, 26, 0.82);
+  color: #f3f1fb;
+  font-size: 0.85em;
+  font-weight: 600;
+  text-align: left;
+}
+[data-theme="light"] .tracklist-current,
+[data-theme="light"] .tracklist {
+  background-color: rgba(255, 255, 255, 0.92);
+  color: #1c1b22;
+}
+.tl-now {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.tl-caret {
+  flex-shrink: 0;
+  opacity: 0.7;
+}
+
+.tracklist {
+  list-style: none;
+  margin: 6px 0 0;
+  padding: 6px;
+  max-height: 190px;
+  overflow-y: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  /* solid-ish backdrop so text stays legible over the video/panel */
+  background-color: rgba(18, 16, 26, 0.9);
+  color: #f3f1fb;
+  scrollbar-width: thin;
+}
+
+.tl-item {
+  display: flex;
+  gap: 10px;
+  padding: 6px 8px;
+  border-radius: 8px;
+  font-size: 0.82em;
+  cursor: pointer;
+  color: inherit;
+  transition: background-color var(--transition);
+}
+.tl-item:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+[data-theme="light"] .tl-item:hover {
+  background-color: rgba(0, 0, 0, 0.06);
+}
+.tl-item.active {
+  background: var(--accent-grad);
+  color: #fff;
+  font-weight: 600;
+}
+.tl-time {
+  flex-shrink: 0;
+  font-variant-numeric: tabular-nums;
+  opacity: 0.65;
+  min-width: 42px;
+}
+.tl-item.active .tl-time {
+  opacity: 0.9;
+}
+.tl-title {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
 /* ---------- now playing ---------- */
 .now-playing {
   z-index: 2;
