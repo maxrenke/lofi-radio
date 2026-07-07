@@ -15,11 +15,12 @@ LOG="maintenance.log"
 echo "===== $(date '+%Y-%m-%d %H:%M:%S') =====" >> "$LOG"
 before=$(md5sum public/stations.json 2>/dev/null | awk '{print $1}')
 
-# 1) refresh live-stream tabs (auto-fixes streams that rotated/ended)
-python3 scripts/refresh_live_streams.py --channel @FantasyLofi --category "Fantasy Lofi" \
-  --insert-after C89.5 >> "$LOG" 2>&1 || echo "  ! Fantasy Lofi refresh failed" >> "$LOG"
+# NOTE: auto-refresh of a live-stream tab is disabled — the Fantasy live
+# streams now live in the hand-curated "Game Lofi" tab (alongside mp3 mixes),
+# and refresh_live_streams.py rewrites a whole category, which would clobber
+# them. Re-run it manually if you want to regenerate a dedicated live tab.
 
-# 2) health check (non-zero exit = some stations broken; just log it)
+# health check (non-zero exit = some stations broken; just log it)
 bash scripts/check-stations.sh >> "$LOG" 2>&1 || echo "  ! health check flagged broken stations" >> "$LOG"
 
 # 3) rebuild only if the station list changed
