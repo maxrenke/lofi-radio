@@ -61,7 +61,8 @@
         {
           "name": "C89.5 Live 📻",
           "picture": "c895.webp",
-          "audio": "https://knhc-ice.streamguys1.com/live"
+          "audio": "https://knhc-ice.streamguys1.com/live",
+          "nowPlaying": "/c895/now_playing.json"
         },
         {
           "name": "Push the Tempo (Latest)",
@@ -77,36 +78,6 @@
           "name": "Cafe Chill (Latest)",
           "picture": "c895-cafe-chill.webp",
           "audio": "/c895/c895_cafe_chill/latest.mp3"
-        }
-      ]
-    },
-    {
-      "name": "Fantasy Lofi",
-      "stations": [
-        {
-          "name": "chill gaming session - fantasy lofi radio 🎧",
-          "picture": "https://i.ytimg.com/vi/4CVJiLQkiGo/hqdefault.jpg",
-          "videoId": "4CVJiLQkiGo"
-        },
-        {
-          "name": "Fantasy Jazz Tavern 🎷",
-          "picture": "https://i.ytimg.com/vi/M4A-BHZVSS0/hqdefault.jpg",
-          "videoId": "M4A-BHZVSS0"
-        },
-        {
-          "name": "cozy campfire ambience radio 🔥",
-          "picture": "https://i.ytimg.com/vi/x96c3vJlNKk/hqdefault.jpg",
-          "videoId": "x96c3vJlNKk"
-        },
-        {
-          "name": "sleepy fantasy covers radio 😴",
-          "picture": "https://i.ytimg.com/vi/kVJ2PsxonxA/hqdefault.jpg",
-          "videoId": "kVJ2PsxonxA"
-        },
-        {
-          "name": "relaxing fantasy piano radio 🎹",
-          "picture": "https://i.ytimg.com/vi/qwHoTqDAicw/hqdefault.jpg",
-          "videoId": "qwHoTqDAicw"
         }
       ]
     },

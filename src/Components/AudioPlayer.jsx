@@ -57,10 +57,13 @@ function AudioPlayer({
   const [chapters, setChapters] = useState([]);
   const [chapterIdx, setChapterIdx] = useState(-1);
   const [showTracklist, setShowTracklist] = useState(false);
+  const [nowPlaying, setNowPlaying] = useState("");
 
   const isAudio = !!station.audio;
   const seekable = isAudio && isFinite(duration) && duration > 0;
   const currentTrack = chapterIdx >= 0 ? chapters[chapterIdx]?.title || "" : "";
+  // Live "now playing" label (e.g. C89.5 via Spinitron), else the chapter track.
+  const liveTrack = station.nowPlaying ? nowPlaying : "";
 
   const savePos = (t) => {
     if (!isAudio) return;
@@ -76,6 +79,27 @@ function AudioPlayer({
     if (audioRef.current) audioRef.current.volume = volume / 100;
     if (ytPlayer && ytPlayer.setVolume) ytPlayer.setVolume(volume);
   }, [volume, ytPlayer]);
+
+  // Live now-playing: poll the station's now_playing sidecar (~30s) while it's
+  // the active station; refresh on an interval only while actually playing.
+  useEffect(() => {
+    setNowPlaying("");
+    if (!station.nowPlaying) return;
+    let cancelled = false;
+    const poll = () =>
+      fetch(station.nowPlaying, { cache: "no-store" })
+        .then((r) => (r.ok ? r.json() : null))
+        .then((d) => {
+          if (!cancelled && d && d.text) setNowPlaying(d.text);
+        })
+        .catch(() => {});
+    poll();
+    const timer = isPlaying ? setInterval(poll, 30000) : null;
+    return () => {
+      cancelled = true;
+      if (timer) clearInterval(timer);
+    };
+  }, [station, isPlaying]);
 
   // Fetch the chapter/tracklist sidecar for finite mp3s (e.g. C89.5 shows).
   // Browsers don't expose ID3 chapters from <audio>, so we serve a JSON sidecar.
@@ -199,17 +223,18 @@ function AudioPlayer({
   // current track becomes the title and the station name becomes the artist.
   useEffect(() => {
     if (!("mediaSession" in navigator)) return;
+    const track = currentTrack || liveTrack;
     try {
       navigator.mediaSession.metadata = new window.MediaMetadata({
-        title: currentTrack || station.name,
-        artist: currentTrack ? station.name : "Lofi Radio",
+        title: track || station.name,
+        artist: track ? station.name : "Lofi Radio",
         artwork: [{ src: artworkFor(station), sizes: "512x512" }],
       });
     } catch (_) {
       /* MediaMetadata unsupported */
     }
     navigator.mediaSession.playbackState = isPlaying ? "playing" : "paused";
-  }, [station, isPlaying, currentTrack]);
+  }, [station, isPlaying, currentTrack, liveTrack]);
 
   // Media Session: action handlers (rebind when the app's callbacks change).
   useEffect(() => {
@@ -321,6 +346,14 @@ function AudioPlayer({
             aria-label="Seek"
           />
           <span className="track-time">-{fmtTime(Math.max(0, duration - currentTime))}</span>
+        </div>
+      )}
+
+      {station.nowPlaying && liveTrack && (
+        <div className="live-nowplaying">
+          <span className="pulsing-circle" />
+          <span className="ln-label">On air</span>
+          <span className="ln-track">{liveTrack}</span>
         </div>
       )}
 

@@ -503,6 +503,39 @@ button:focus-visible {
   cursor: pointer;
 }
 
+/* ---------- live now-playing (e.g. C89.5 via Spinitron) ---------- */
+.live-nowplaying {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  max-width: 360px;
+  margin: 6px auto 0;
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  background-color: rgba(18, 16, 26, 0.82);
+  color: #f3f1fb;
+  font-size: 0.85em;
+}
+[data-theme="light"] .live-nowplaying {
+  background-color: rgba(255, 255, 255, 0.92);
+  color: #1c1b22;
+}
+.ln-label {
+  flex-shrink: 0;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--accent);
+}
+.ln-track {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-weight: 600;
+}
+
 /* ---------- tracklist (ID3 chapters for on-demand shows) ---------- */
 .tracklist-wrap {
   width: 100%;
