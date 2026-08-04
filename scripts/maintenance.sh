@@ -2,8 +2,10 @@
 #
 # maintenance.sh — periodic upkeep for the radio (run from cron):
 #   1. refresh the Fantasy Lofi tab from currently-live streams
-#   2. health-check every YouTube station (logs the dead ones)
-#   3. rebuild the container only if stations.json actually changed
+#   2. refresh the Sole Space tab with the channel's latest uploads
+#      (apple juice. always pinned first)
+#   3. health-check every YouTube station (logs the dead ones)
+#   4. rebuild the container only if stations.json actually changed
 #
 # Logs to maintenance.log in the repo root. Install via cron, e.g. weekly:
 #   0 4 * * 0 /home/casaos/lofi-radio/scripts/maintenance.sh
@@ -19,6 +21,9 @@ before=$(md5sum public/stations.json 2>/dev/null | awk '{print $1}')
 # streams now live in the hand-curated "Game Lofi" tab (alongside mp3 mixes),
 # and refresh_live_streams.py rewrites a whole category, which would clobber
 # them. Re-run it manually if you want to regenerate a dedicated live tab.
+
+# Sole Space: keep "apple juice." first, fill the rest with latest uploads.
+python3 scripts/refresh_sole_space.py >> "$LOG" 2>&1 || echo "  ! Sole Space refresh failed" >> "$LOG"
 
 # health check (non-zero exit = some stations broken; just log it)
 bash scripts/check-stations.sh >> "$LOG" 2>&1 || echo "  ! health check flagged broken stations" >> "$LOG"
