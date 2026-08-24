@@ -596,6 +596,26 @@
           "videoId": "PLXccZVbAPo"
         },
         {
+          "name": "soft steps.",
+          "picture": "https://i.ytimg.com/vi/4V2XWuABxBs/hqdefault.jpg",
+          "videoId": "4V2XWuABxBs"
+        },
+        {
+          "name": "fancy paws.",
+          "picture": "https://i.ytimg.com/vi/LefxqaJxtVA/hqdefault.jpg",
+          "videoId": "LefxqaJxtVA"
+        },
+        {
+          "name": "flashy star.",
+          "picture": "https://i.ytimg.com/vi/bpIgtCZt9aY/hqdefault.jpg",
+          "videoId": "bpIgtCZt9aY"
+        },
+        {
+          "name": "alone again.",
+          "picture": "https://i.ytimg.com/vi/ja2Qsy-E1Ro/hqdefault.jpg",
+          "videoId": "ja2Qsy-E1Ro"
+        },
+        {
           "name": "blue paws.",
           "picture": "https://i.ytimg.com/vi/mm_JTnjbv5E/hqdefault.jpg",
           "videoId": "mm_JTnjbv5E"
@@ -629,26 +649,36 @@
           "name": "potion master.",
           "picture": "https://i.ytimg.com/vi/O13GmOmLg5c/hqdefault.jpg",
           "videoId": "O13GmOmLg5c"
+        }
+      ]
+    },
+    {
+      "name": "DJ Gabi",
+      "stations": [
+        {
+          "name": "DJ Gabi - Melodic Techno DJ Set 2026",
+          "picture": "https://i.ytimg.com/vi/VjuSihgwmZs/hqdefault.jpg",
+          "audio": "/music/DJ%20Gabi/DJ%20Gabi%20-%20Melodic%20Techno%20DJ%20Set%202026.mp3"
         },
         {
-          "name": "purring down.",
-          "picture": "https://i.ytimg.com/vi/hA3QjOY7WDI/hqdefault.jpg",
-          "videoId": "hA3QjOY7WDI"
+          "name": "DJ Gabi - Melodic Techno DJ Set (Marbella 2026)",
+          "picture": "https://i.ytimg.com/vi/ng9Kd2M2puo/hqdefault.jpg",
+          "audio": "/music/DJ%20Gabi/DJ%20Gabi%20-%20Melodic%20Techno%20DJ%20Set%20%28Marbella%202026%29.mp3"
         },
         {
-          "name": "brown paper.",
-          "picture": "https://i.ytimg.com/vi/ilYYK-sMnmE/hqdefault.jpg",
-          "videoId": "ilYYK-sMnmE"
+          "name": "DJ Gabi - Tech House DJ Mix (January 2026)",
+          "picture": "https://i.ytimg.com/vi/neQOA7OSvHo/hqdefault.jpg",
+          "audio": "/music/DJ%20Gabi/DJ%20Gabi%20-%20Tech%20House%20DJ%20Mix%20%28January%202026%29.mp3"
         },
         {
-          "name": "rainy mood.",
-          "picture": "https://i.ytimg.com/vi/Ba9lPcu-1Tg/hqdefault.jpg",
-          "videoId": "Ba9lPcu-1Tg"
+          "name": "DJ Gabi - Afro House Remixes 2026",
+          "picture": "https://i.ytimg.com/vi/zC5SK7vqy_I/hqdefault.jpg",
+          "audio": "/music/DJ%20Gabi/DJ%20Gabi%20-%20Afro%20House%20Remixes%202026.mp3"
         },
         {
-          "name": "cat logic.",
-          "picture": "https://i.ytimg.com/vi/H8CA7vlMJHU/hqdefault.jpg",
-          "videoId": "H8CA7vlMJHU"
+          "name": "DJ Gabi - Melodic Techno and Progressive House Mix 2026",
+          "picture": "https://i.ytimg.com/vi/BNem_Epe-Ac/hqdefault.jpg",
+          "audio": "/music/DJ%20Gabi/DJ%20Gabi%20-%20Melodic%20Techno%20and%20Progressive%20House%20Mix%202026.mp3"
         }
       ]
     }
