@@ -686,9 +686,9 @@
       "name": "Mario Kart World",
       "stations": [
         {
-          "name": "Mario Kart World - Full OST",
+          "name": "Mario Kart World - Full OST (Base Game)",
           "picture": "mario-kart-world.jpg",
-          "audio": "/music/Mario%20Kart%20World/Mario%20Kart%20World%20-%20Full%20OST.mp3"
+          "audio": "/music/Mario%20Kart%20World/Mario%20Kart%20World%20%28Base%20Game%29%20-%20Full%20OST.mp3"
         }
       ]
     }
