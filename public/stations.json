@@ -681,6 +681,16 @@
           "audio": "/music/DJ%20Gabi/DJ%20Gabi%20-%20Melodic%20Techno%20and%20Progressive%20House%20Mix%202026.mp3"
         }
       ]
+    },
+    {
+      "name": "Mario Kart World",
+      "stations": [
+        {
+          "name": "Mario Kart World - Full OST",
+          "picture": "mario-kart-world.jpg",
+          "audio": "/music/Mario%20Kart%20World/Mario%20Kart%20World%20-%20Full%20OST.mp3"
+        }
+      ]
     }
   ]
 }
