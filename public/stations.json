@@ -596,6 +596,21 @@
           "videoId": "PLXccZVbAPo"
         },
         {
+          "name": "crayon club.",
+          "picture": "https://i.ytimg.com/vi/2pobmVVgmLs/hqdefault.jpg",
+          "videoId": "2pobmVVgmLs"
+        },
+        {
+          "name": "green comet.",
+          "picture": "https://i.ytimg.com/vi/Qc0R4gICRWc/hqdefault.jpg",
+          "videoId": "Qc0R4gICRWc"
+        },
+        {
+          "name": "milky street.",
+          "picture": "https://i.ytimg.com/vi/7_IU7tI1UjI/hqdefault.jpg",
+          "videoId": "7_IU7tI1UjI"
+        },
+        {
           "name": "soft steps.",
           "picture": "https://i.ytimg.com/vi/4V2XWuABxBs/hqdefault.jpg",
           "videoId": "4V2XWuABxBs"
@@ -634,21 +649,6 @@
           "name": "grocery run.",
           "picture": "https://i.ytimg.com/vi/RqN0n-pF-Z0/hqdefault.jpg",
           "videoId": "RqN0n-pF-Z0"
-        },
-        {
-          "name": "sleep tight.",
-          "picture": "https://i.ytimg.com/vi/EC9KYJTb8oU/hqdefault.jpg",
-          "videoId": "EC9KYJTb8oU"
-        },
-        {
-          "name": "star gaze.",
-          "picture": "https://i.ytimg.com/vi/WhB1NeKHckQ/hqdefault.jpg",
-          "videoId": "WhB1NeKHckQ"
-        },
-        {
-          "name": "potion master.",
-          "picture": "https://i.ytimg.com/vi/O13GmOmLg5c/hqdefault.jpg",
-          "videoId": "O13GmOmLg5c"
         }
       ]
     },
@@ -689,6 +689,71 @@
           "name": "Mario Kart World - Full OST (Base Game)",
           "picture": "mario-kart-world.jpg",
           "audio": "/music/Mario%20Kart%20World/Mario%20Kart%20World%20%28Base%20Game%29%20-%20Full%20OST.mp3"
+        }
+      ]
+    },
+    {
+      "name": "OxYy",
+      "stations": [
+        {
+          "name": "OxYy - My Heart Will Go On (Cover)",
+          "picture": "https://i.ytimg.com/vi/9ALSYtRcHuU/hqdefault.jpg",
+          "audio": "/music/OxYy/OxYy%20-%20My%20Heart%20Will%20Go%20On%20%28Cover%29.mp3"
+        },
+        {
+          "name": "OxYy - Never Enough (Cover Remix)",
+          "picture": "https://i.ytimg.com/vi/eUepzimCcKY/hqdefault.jpg",
+          "audio": "/music/OxYy/OxYy%20-%20Never%20Enough%20%28Cover%20Remix%29.mp3"
+        },
+        {
+          "name": "OxYy - DJ Sammy - Heaven (Remix)",
+          "picture": "https://i.ytimg.com/vi/5HrMPsffB3A/hqdefault.jpg",
+          "audio": "/music/OxYy/OxYy%20-%20DJ%20Sammy%20-%20Heaven%20%28Remix%29.mp3"
+        },
+        {
+          "name": "OxYy - Summer of 69 (Cover)",
+          "picture": "https://i.ytimg.com/vi/YG6JAfBkhxc/hqdefault.jpg",
+          "audio": "/music/OxYy/OxYy%20-%20Summer%20of%2069%20%28Cover%29.mp3"
+        },
+        {
+          "name": "OxYy - Turn Me On (Cover)",
+          "picture": "https://i.ytimg.com/vi/MqoRkr0r4M4/hqdefault.jpg",
+          "audio": "/music/OxYy/OxYy%20-%20Turn%20Me%20On%20%28Cover%29.mp3"
+        },
+        {
+          "name": "OxYy - Grace (D&B Remix)",
+          "picture": "https://i.ytimg.com/vi/CZjJFN8WqDM/hqdefault.jpg",
+          "audio": "/music/OxYy/OxYy%20-%20Grace%20%28D%26B%20Remix%29.mp3"
+        },
+        {
+          "name": "OxYy - Let It Be (Remix)",
+          "picture": "https://i.ytimg.com/vi/JMQE2hH8K2k/hqdefault.jpg",
+          "audio": "/music/OxYy/OxYy%20-%20Let%20It%20Be%20%28Remix%29.mp3"
+        },
+        {
+          "name": "OxYy - Beautiful Things (Remix)",
+          "picture": "https://i.ytimg.com/vi/hUpi0lt1tzw/hqdefault.jpg",
+          "audio": "/music/OxYy/OxYy%20-%20Beautiful%20Things%20%28Remix%29.mp3"
+        },
+        {
+          "name": "OxYy - Life is a Highway (UK Hardcore)",
+          "picture": "https://i.ytimg.com/vi/l48dHZv0-CM/hqdefault.jpg",
+          "audio": "/music/OxYy/OxYy%20-%20Life%20is%20a%20Highway%20%28UK%20Hardcore%29.mp3"
+        },
+        {
+          "name": "OxYy - Lost Love Note (House Revive Mix)",
+          "picture": "https://i.ytimg.com/vi/M4KBh8JkpHs/hqdefault.jpg",
+          "audio": "/music/OxYy/OxYy%20-%20Lost%20Love%20Note%20%28House%20Revive%20Mix%29.mp3"
+        },
+        {
+          "name": "OxYy - Dancing In the Dark (Remix)",
+          "picture": "https://i.ytimg.com/vi/-owRqZ309aE/hqdefault.jpg",
+          "audio": "/music/OxYy/OxYy%20-%20Dancing%20In%20the%20Dark%20%28Remix%29.mp3"
+        },
+        {
+          "name": "OxYy - Sky Full Of Stars",
+          "picture": "https://i.ytimg.com/vi/37aa3LgJOVM/hqdefault.jpg",
+          "audio": "/music/OxYy/OxYy%20-%20Sky%20Full%20Of%20Stars.mp3"
         }
       ]
     }
