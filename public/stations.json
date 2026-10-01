@@ -5,8 +5,8 @@
       "stations": [
         {
           "name": "Lofi Girl 📚",
-          "picture": "lofi-girl.webp",
-          "videoId": "X4VbdwhkE10"
+          "picture": "https://i.ytimg.com/vi/rFZHOHl-L8A/hqdefault.jpg",
+          "videoId": "rFZHOHl-L8A"
         },
         {
           "name": "Lofi Girl - Sleep 💤",
@@ -85,9 +85,9 @@
       "name": "Game Lofi",
       "stations": [
         {
-          "name": "chill gaming session - fantasy lofi radio 🎧",
-          "picture": "https://i.ytimg.com/vi/4CVJiLQkiGo/hqdefault.jpg",
-          "videoId": "4CVJiLQkiGo"
+          "name": "gaming lofi radio 24/7 👾",
+          "picture": "https://i.ytimg.com/vi/Fo5BDohM9Fo/hqdefault.jpg",
+          "videoId": "Fo5BDohM9Fo"
         },
         {
           "name": "Fantasy Jazz Tavern 🎷",
@@ -95,9 +95,9 @@
           "videoId": "M4A-BHZVSS0"
         },
         {
-          "name": "cozy campfire ambience radio 🔥",
-          "picture": "https://i.ytimg.com/vi/x96c3vJlNKk/hqdefault.jpg",
-          "videoId": "x96c3vJlNKk"
+          "name": "peaceful fantasy guitar radio 🎸",
+          "picture": "https://i.ytimg.com/vi/XivQWeRFI7w/hqdefault.jpg",
+          "videoId": "XivQWeRFI7w"
         },
         {
           "name": "sleepy fantasy covers radio 😴",
@@ -376,9 +376,9 @@
           "videoId": "Cwq3AFyV044"
         },
         {
-          "name": "DnBRadio Atmospheric",
-          "picture": "DnBRadio-Atmospheric.webp",
-          "videoId": "V1eqPTRAW6s"
+          "name": "Jungle & DnB Radio - Atmospheric 🌌",
+          "picture": "https://i.ytimg.com/vi/G-viwnGNpuY/hqdefault.jpg",
+          "videoId": "G-viwnGNpuY"
         },
         {
           "name": "chao's_aether",
