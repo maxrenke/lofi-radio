@@ -3,6 +3,15 @@
 refresh_sole_space.py — populate the "Sole Space" stations.json category
 with a pinned video first, followed by the channel's latest uploads.
 
+Each station is downloaded as a local mp3 (same pattern as the Shingo
+Takahashi / DJ Gabi / OxYy tabs) into /DATA/Media/Music/Sole Space and
+served via /music, so the player gets real seek + pause/resume position
+tracking instead of a YouTube embed. Already-downloaded files are left
+alone (by filename), so re-running only fetches what's new; files that
+fall out of the "latest N" rotation stay on disk — they're just dropped
+from the category list — so nothing already downloaded is ever deleted
+by this script.
+
 The app serves a static stations.json (no backend), so this can't be truly
 "live at page load" — instead run this to (re)generate the category, then
 rebuild the container. Safe to run on a cron (see maintenance.sh) so the
@@ -15,19 +24,24 @@ Usage:
   python3 scripts/refresh_sole_space.py --channel @Solespace.mp3 \
       --category "Sole Space" --pin PLXccZVbAPo --count 12
 
-Deps: stdlib only (urllib, json, re).
+Deps: yt-dlp, mutagen (both already used elsewhere in this repo's scripts).
 """
 import argparse
 import json
 import os
 import re
+import shutil
+import subprocess
 import sys
 import time
+import urllib.parse
 import urllib.request
 
 UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120 Safari/537.36"
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 STATIONS = os.path.join(ROOT, "public", "stations.json")
+MEDIA_DIR = "/DATA/Media/Music"
+YTDLP = "/home/casaos/.local/bin/yt-dlp" if os.path.isfile("/home/casaos/.local/bin/yt-dlp") else (shutil.which("yt-dlp") or "yt-dlp")
 
 
 def fetch(url, timeout=15):
@@ -63,6 +77,54 @@ def oembed_title(vid):
         return None
 
 
+def safe_filename(title):
+    return re.sub(r'[\/:*?"<>|]', "-", title)
+
+
+def download_mp3(vid, title, dest_dir, label):
+    """Download vid as "<label> - <title>.mp3" into dest_dir unless it
+    already exists. Returns the filename (not full path) on success."""
+    fname = f"{label} - {safe_filename(title)}.mp3"
+    target = os.path.join(dest_dir, fname)
+    if os.path.isfile(target):
+        return fname
+
+    os.makedirs(dest_dir, exist_ok=True)
+    print(f"  ⬇ downloading: {title[:55]} ({vid})")
+    result = subprocess.run(
+        [
+            YTDLP, "-x", "--audio-format", "mp3", "--audio-quality", "0",
+            "--embed-thumbnail", "--embed-metadata",
+            "-o", os.path.join(dest_dir, f"{label} - {safe_filename(title)}.%(ext)s"),
+            f"https://www.youtube.com/watch?v={vid}",
+        ],
+        capture_output=True, text=True,
+    )
+    if result.returncode != 0 or not os.path.isfile(target):
+        print(f"  ! download failed for {vid}: {result.stderr.strip()[-300:]}", file=sys.stderr)
+        return None
+
+    try:
+        from mutagen.easyid3 import EasyID3
+        from mutagen.mp3 import MP3
+        try:
+            tags = EasyID3(target)
+        except Exception:
+            mp3 = MP3(target)
+            mp3.add_tags()
+            mp3.save()
+            tags = EasyID3(target)
+        tags["artist"] = label
+        tags["albumartist"] = label
+        tags["album"] = label
+        tags["title"] = title
+        tags.save()
+    except Exception as e:
+        print(f"  ! tagging failed for {fname}: {e}", file=sys.stderr)
+
+    return fname
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--channel", default="@Solespace.mp3", help="Channel handle")
@@ -70,18 +132,31 @@ def main():
     ap.add_argument("--pin", action="append", default=["PLXccZVbAPo"],
                      help="Video ID to force first (repeatable, in order). Default: apple juice.")
     ap.add_argument("--count", type=int, default=12, help="Total stations wanted")
-    ap.add_argument("--thumb", default="hqdefault", help="Thumbnail quality")
+    ap.add_argument("--thumb", default="hqdefault", help="Thumbnail quality (for the station picture)")
     args = ap.parse_args()
 
+    dest_dir = os.path.join(MEDIA_DIR, args.category)
     stations, seen = [], set()
+
+    def add_station(vid, title):
+        fname = download_mp3(vid, title, dest_dir, args.category)
+        if not fname:
+            return False
+        audio_path = "/music/" + urllib.parse.quote(args.category) + "/" + urllib.parse.quote(fname)
+        stations.append({
+            "name": title,
+            "picture": f"https://i.ytimg.com/vi/{vid}/{args.thumb}.jpg",
+            "audio": audio_path,
+        })
+        seen.add(vid)
+        return True
 
     for vid in args.pin:
         title = oembed_title(vid)
         if not title:
             print(f"  ! pinned video {vid} is not embeddable/available — skipping", file=sys.stderr)
             continue
-        stations.append({"name": title, "picture": f"https://i.ytimg.com/vi/{vid}/{args.thumb}.jpg", "videoId": vid})
-        seen.add(vid)
+        add_station(vid, title)
 
     print(f"Fetching latest uploads for {args.channel} ...")
     candidates = latest_video_ids(args.channel, limit=args.count * 2)
@@ -93,8 +168,7 @@ def main():
         title = oembed_title(vid)
         if not title:
             continue  # not embeddable / removed
-        stations.append({"name": title, "picture": f"https://i.ytimg.com/vi/{vid}/{args.thumb}.jpg", "videoId": vid})
-        seen.add(vid)
+        add_station(vid, title)
         time.sleep(0.2)
 
     if not stations:
@@ -102,7 +176,7 @@ def main():
         sys.exit(1)
 
     for s in stations:
-        print(f"  ✓ {s['name'][:55]}  ({s['videoId']})")
+        print(f"  ✓ {s['name'][:55]}")
 
     data = json.load(open(STATIONS, encoding="utf-8"))
     cats = [c for c in data["categories"] if c["name"] != args.category]

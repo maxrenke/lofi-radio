@@ -588,71 +588,6 @@
       ]
     },
     {
-      "name": "Sole Space",
-      "stations": [
-        {
-          "name": "apple juice.",
-          "picture": "https://i.ytimg.com/vi/PLXccZVbAPo/hqdefault.jpg",
-          "videoId": "PLXccZVbAPo"
-        },
-        {
-          "name": "outer space.",
-          "picture": "https://i.ytimg.com/vi/PcqNyCm5h0Q/hqdefault.jpg",
-          "videoId": "PcqNyCm5h0Q"
-        },
-        {
-          "name": "blue claw.",
-          "picture": "https://i.ytimg.com/vi/Slcxg81Mzls/hqdefault.jpg",
-          "videoId": "Slcxg81Mzls"
-        },
-        {
-          "name": "fuzzy lime.",
-          "picture": "https://i.ytimg.com/vi/R2XyYFuRD6s/hqdefault.jpg",
-          "videoId": "R2XyYFuRD6s"
-        },
-        {
-          "name": "fly away.",
-          "picture": "https://i.ytimg.com/vi/PkqseQn-KU0/hqdefault.jpg",
-          "videoId": "PkqseQn-KU0"
-        },
-        {
-          "name": "purrple phase.",
-          "picture": "https://i.ytimg.com/vi/R3EA7sNynvE/hqdefault.jpg",
-          "videoId": "R3EA7sNynvE"
-        },
-        {
-          "name": "party night.",
-          "picture": "https://i.ytimg.com/vi/sCAcX31gNfg/hqdefault.jpg",
-          "videoId": "sCAcX31gNfg"
-        },
-        {
-          "name": "honey nap.",
-          "picture": "https://i.ytimg.com/vi/y2JzgMf8ZRk/hqdefault.jpg",
-          "videoId": "y2JzgMf8ZRk"
-        },
-        {
-          "name": "vanilla milk.",
-          "picture": "https://i.ytimg.com/vi/FqJy0d__eNg/hqdefault.jpg",
-          "videoId": "FqJy0d__eNg"
-        },
-        {
-          "name": "grape fruit.",
-          "picture": "https://i.ytimg.com/vi/_csUOtgNVp8/hqdefault.jpg",
-          "videoId": "_csUOtgNVp8"
-        },
-        {
-          "name": "comical cat.",
-          "picture": "https://i.ytimg.com/vi/DzBNVc0J_U8/hqdefault.jpg",
-          "videoId": "DzBNVc0J_U8"
-        },
-        {
-          "name": "dusty green.",
-          "picture": "https://i.ytimg.com/vi/wIkOOoMArGA/hqdefault.jpg",
-          "videoId": "wIkOOoMArGA"
-        }
-      ]
-    },
-    {
       "name": "DJ Gabi",
       "stations": [
         {
@@ -764,6 +699,71 @@
           "name": "8 Hour Tentacle Rave - Reign of the Black Empire",
           "picture": "tentacle-rave.jpg",
           "audio": "/music/Tentacle%20Rave/8%20Hour%20Tentacle%20Rave%20-%20Reign%20of%20the%20Black%20Empire.mp3"
+        }
+      ]
+    },
+    {
+      "name": "Sole Space",
+      "stations": [
+        {
+          "name": "apple juice.",
+          "picture": "https://i.ytimg.com/vi/PLXccZVbAPo/hqdefault.jpg",
+          "audio": "/music/Sole%20Space/Sole%20Space%20-%20apple%20juice..mp3"
+        },
+        {
+          "name": "outer space.",
+          "picture": "https://i.ytimg.com/vi/PcqNyCm5h0Q/hqdefault.jpg",
+          "audio": "/music/Sole%20Space/Sole%20Space%20-%20outer%20space..mp3"
+        },
+        {
+          "name": "blue claw.",
+          "picture": "https://i.ytimg.com/vi/Slcxg81Mzls/hqdefault.jpg",
+          "audio": "/music/Sole%20Space/Sole%20Space%20-%20blue%20claw..mp3"
+        },
+        {
+          "name": "fuzzy lime.",
+          "picture": "https://i.ytimg.com/vi/R2XyYFuRD6s/hqdefault.jpg",
+          "videoId": "R2XyYFuRD6s"
+        },
+        {
+          "name": "fly away.",
+          "picture": "https://i.ytimg.com/vi/PkqseQn-KU0/hqdefault.jpg",
+          "videoId": "PkqseQn-KU0"
+        },
+        {
+          "name": "purrple phase.",
+          "picture": "https://i.ytimg.com/vi/R3EA7sNynvE/hqdefault.jpg",
+          "audio": "/music/Sole%20Space/Sole%20Space%20-%20purrple%20phase..mp3"
+        },
+        {
+          "name": "party night.",
+          "picture": "https://i.ytimg.com/vi/sCAcX31gNfg/hqdefault.jpg",
+          "audio": "/music/Sole%20Space/Sole%20Space%20-%20party%20night..mp3"
+        },
+        {
+          "name": "honey nap.",
+          "picture": "https://i.ytimg.com/vi/y2JzgMf8ZRk/hqdefault.jpg",
+          "audio": "/music/Sole%20Space/Sole%20Space%20-%20honey%20nap..mp3"
+        },
+        {
+          "name": "vanilla milk.",
+          "picture": "https://i.ytimg.com/vi/FqJy0d__eNg/hqdefault.jpg",
+          "audio": "/music/Sole%20Space/Sole%20Space%20-%20vanilla%20milk..mp3"
+        },
+        {
+          "name": "grape fruit.",
+          "picture": "https://i.ytimg.com/vi/_csUOtgNVp8/hqdefault.jpg",
+          "audio": "/music/Sole%20Space/Sole%20Space%20-%20grape%20fruit..mp3"
+        },
+        {
+          "name": "comical cat.",
+          "picture": "https://i.ytimg.com/vi/DzBNVc0J_U8/hqdefault.jpg",
+          "videoId": "DzBNVc0J_U8"
+        },
+        {
+          "name": "dusty green.",
+          "picture": "https://i.ytimg.com/vi/wIkOOoMArGA/hqdefault.jpg",
+          "videoId": "wIkOOoMArGA"
         }
       ]
     }
