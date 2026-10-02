@@ -756,6 +756,16 @@
           "audio": "/music/OxYy/OxYy%20-%20Sky%20Full%20Of%20Stars.mp3"
         }
       ]
+    },
+    {
+      "name": "Tentacle Rave",
+      "stations": [
+        {
+          "name": "8 Hour Tentacle Rave - Reign of the Black Empire",
+          "picture": "tentacle-rave.jpg",
+          "audio": "/music/Tentacle%20Rave/8%20Hour%20Tentacle%20Rave%20-%20Reign%20of%20the%20Black%20Empire.mp3"
+        }
+      ]
     }
   ]
 }
