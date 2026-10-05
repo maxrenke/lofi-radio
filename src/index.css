@@ -882,3 +882,221 @@ a {
     width: 100%;
   }
 }
+
+/* ---------- phone layout (iPhone Pro class, ~393-440px wide) ----------
+   Full-bleed, dynamic-viewport-height app: header + category pills on top,
+   scrolling station list in the middle, player pinned to the bottom.
+   The wrapper divs are flattened with display:contents so the player parts
+   become direct flex children of .app. */
+@media only screen and (max-width: 520px) {
+  html,
+  body {
+    height: 100%;
+    overscroll-behavior: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+  body {
+    display: block;
+    padding: 0;
+    min-height: 100dvh;
+  }
+
+  .app {
+    width: 100%;
+    max-width: none;
+    height: 100dvh;
+    max-height: 100dvh;
+    margin: 0;
+    border-radius: 0;
+    border: 0;
+    box-shadow: none;
+    overflow: hidden;
+    gap: 8px;
+    justify-content: flex-start;
+    padding: calc(env(safe-area-inset-top, 0px) + 10px)
+      calc(env(safe-area-inset-right, 0px) + 14px)
+      calc(env(safe-area-inset-bottom, 0px) + 12px)
+      calc(env(safe-area-inset-left, 0px) + 14px);
+  }
+  .colappse-body,
+  .player-controls {
+    display: contents;
+  }
+  .colappse-body.collapsed {
+    display: none;
+  }
+  .app.app2 {
+    height: auto;
+    padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 12px);
+  }
+
+  /* compact header: title + language on one row, no Ko-fi banner */
+  .top-container {
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  .main-title {
+    font-size: 16px;
+    margin: 0;
+    white-space: nowrap;
+  }
+  .top-container .selector-bg-img {
+    padding: 6px 10px;
+    font-size: 14px;
+  }
+  .container-footer {
+    display: none;
+  }
+
+  /* one-row toolbar with 42px touch targets (fullscreen API is a no-op on iPhone) */
+  .top-container-buttons {
+    flex-wrap: nowrap;
+    width: 100%;
+    gap: 6px;
+    margin: 0;
+  }
+  .top-container-buttons .background-container {
+    flex: 1;
+    min-width: 0;
+  }
+  .top-container-buttons .selector-bg-img {
+    width: 100%;
+    height: 42px;
+    font-size: 14px;
+  }
+  .top-container-buttons > button {
+    width: 42px;
+    height: 42px;
+    flex-shrink: 0;
+  }
+  .btn-fullscreen {
+    display: none !important;
+  }
+
+  /* categories: single swipeable row, edge to edge */
+  .title-cat-stat,
+  .player-controls input {
+    display: none;
+  }
+  .category-pills {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    overflow-x: auto;
+    width: calc(100% + 28px);
+    margin: 0 -14px;
+    padding: 4px 14px 8px;
+    scroll-snap-type: x proximity;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    flex-shrink: 0;
+  }
+  .category-pills::-webkit-scrollbar {
+    display: none;
+  }
+  .category-pill {
+    flex-shrink: 0;
+    scroll-snap-align: center;
+    padding: 10px 16px !important;
+    font-size: 0.95em;
+  }
+  .category-pills-secondary {
+    margin-top: 0;
+    padding-top: 4px;
+    border-top: 0;
+  }
+
+  /* stations: the only scrolling region */
+  .stations-container {
+    flex: 1 1 auto;
+    min-height: 0;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: 8px;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding: 2px 0 6px;
+  }
+  .stations-container::-webkit-scrollbar {
+    display: none;
+  }
+  .station-row {
+    flex-direction: column;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+  .btn-station {
+    width: 100%;
+    min-height: 56px;
+    padding: 8px 12px;
+    gap: 12px;
+    font-size: 1em;
+    white-space: normal;
+  }
+  .station-picture {
+    width: 40px;
+    height: 40px;
+  }
+
+  /* player dock: now-playing, transport, scrubber, tracklist pinned below the list */
+  .now-playing {
+    max-width: none;
+    flex-shrink: 0;
+    padding: 8px 12px;
+  }
+  .now-playing-art {
+    width: 44px;
+    height: 44px;
+  }
+  .pause-play-buttons {
+    flex-shrink: 0;
+    gap: 22px;
+    margin: 0;
+  }
+  .pause-play-buttons button {
+    width: 50px;
+    height: 50px;
+  }
+  .pause-play-buttons button:nth-child(2) {
+    width: 62px;
+    height: 62px;
+  }
+  .audio-player {
+    flex-shrink: 0;
+  }
+  .track-scrubber,
+  .live-nowplaying,
+  .tracklist-wrap {
+    max-width: none;
+  }
+  .track-range {
+    height: 8px;
+  }
+  .track-range::-webkit-slider-thumb {
+    width: 22px;
+    height: 22px;
+  }
+  .tracklist {
+    max-height: 26dvh;
+    overscroll-behavior: contain;
+  }
+  /* iOS ignores element.volume and has hardware buttons, so the slider is dead weight */
+  .volume-control-wrap {
+    display: none;
+  }
+
+  .show-app-button {
+    bottom: calc(env(safe-area-inset-bottom, 0px) + 14px);
+  }
+}
+
+/* no sticky hover lift on touch screens */
+@media (hover: none) {
+  button:hover,
+  .btn-station:hover {
+    transform: none;
+    box-shadow: none;
+  }
+}

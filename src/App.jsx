@@ -359,6 +359,7 @@ function App() {
             <FaInfoCircle />
           </button>
           <button
+            className="btn-fullscreen"
             onClick={toggleFullScreen}
             aria-label="Activar o desactivar pantalla completa">
             {isFullScreen ? <BsFullscreenExit /> : <BsFullscreen />}

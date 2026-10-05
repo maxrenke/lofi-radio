@@ -35,6 +35,14 @@ function PlayerControls({
     if (isOther(selectedCategoryName)) setShowOther(true);
   }, [selectedCategoryName]);
 
+  // On phones the pills are one swipeable row; keep the active one in view.
+  useEffect(() => {
+    if (!window.matchMedia("(max-width: 520px)").matches) return;
+    document
+      .querySelector(".category-pills .selected-category")
+      ?.scrollIntoView({ inline: "center", block: "nearest", behavior: "smooth" });
+  }, [selectedCategoryName, showOther]);
+
   // Stations can be YouTube (videoId) or HTML5 audio (audio url); use whichever
   // is present as the unique identity.
   const stationId = (s) => (s ? s.videoId || s.audio : undefined);
