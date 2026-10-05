@@ -711,6 +711,11 @@
           "audio": "/music/Sole%20Space/Sole%20Space%20-%20apple%20juice..mp3"
         },
         {
+          "name": "spooky files.",
+          "picture": "https://i.ytimg.com/vi/goOFIrR1j6Y/hqdefault.jpg",
+          "audio": "/music/Sole%20Space/Sole%20Space%20-%20spooky%20files..mp3"
+        },
+        {
           "name": "outer space.",
           "picture": "https://i.ytimg.com/vi/PcqNyCm5h0Q/hqdefault.jpg",
           "audio": "/music/Sole%20Space/Sole%20Space%20-%20outer%20space..mp3"
@@ -723,12 +728,12 @@
         {
           "name": "fuzzy lime.",
           "picture": "https://i.ytimg.com/vi/R2XyYFuRD6s/hqdefault.jpg",
-          "videoId": "R2XyYFuRD6s"
+          "audio": "/music/Sole%20Space/Sole%20Space%20-%20fuzzy%20lime..mp3"
         },
         {
           "name": "fly away.",
           "picture": "https://i.ytimg.com/vi/PkqseQn-KU0/hqdefault.jpg",
-          "videoId": "PkqseQn-KU0"
+          "audio": "/music/Sole%20Space/Sole%20Space%20-%20fly%20away..mp3"
         },
         {
           "name": "purrple phase.",
@@ -758,12 +763,17 @@
         {
           "name": "comical cat.",
           "picture": "https://i.ytimg.com/vi/DzBNVc0J_U8/hqdefault.jpg",
-          "videoId": "DzBNVc0J_U8"
-        },
+          "audio": "/music/Sole%20Space/Sole%20Space%20-%20comical%20cat..mp3"
+        }
+      ]
+    },
+    {
+      "name": "Neptune Square",
+      "stations": [
         {
-          "name": "dusty green.",
-          "picture": "https://i.ytimg.com/vi/wIkOOoMArGA/hqdefault.jpg",
-          "videoId": "wIkOOoMArGA"
+          "name": "Neptune Square (1 Hour Loop)",
+          "picture": "neptune-square.jpg",
+          "audio": "/music/Neptune%20Square/Neptune%20Square%20%281%20Hour%20Loop%29.mp3"
         }
       ]
     }
