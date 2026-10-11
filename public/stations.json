@@ -711,6 +711,26 @@
           "audio": "/music/Sole%20Space/Sole%20Space%20-%20apple%20juice..mp3"
         },
         {
+          "name": "maple street.",
+          "picture": "https://i.ytimg.com/vi/xxaQ-AsZWmI/hqdefault.jpg",
+          "audio": "/music/Sole%20Space/Sole%20Space%20-%20maple%20street..mp3"
+        },
+        {
+          "name": "ghost club.",
+          "picture": "https://i.ytimg.com/vi/bR38g6E4xfQ/hqdefault.jpg",
+          "audio": "/music/Sole%20Space/Sole%20Space%20-%20ghost%20club..mp3"
+        },
+        {
+          "name": "fuzzy chords.",
+          "picture": "https://i.ytimg.com/vi/L-PkxUe1zrA/hqdefault.jpg",
+          "audio": "/music/Sole%20Space/Sole%20Space%20-%20fuzzy%20chords..mp3"
+        },
+        {
+          "name": "reader mode.",
+          "picture": "https://i.ytimg.com/vi/EPiAGnbqals/hqdefault.jpg",
+          "audio": "/music/Sole%20Space/Sole%20Space%20-%20reader%20mode..mp3"
+        },
+        {
           "name": "spooky files.",
           "picture": "https://i.ytimg.com/vi/goOFIrR1j6Y/hqdefault.jpg",
           "audio": "/music/Sole%20Space/Sole%20Space%20-%20spooky%20files..mp3"
@@ -744,26 +764,6 @@
           "name": "party night.",
           "picture": "https://i.ytimg.com/vi/sCAcX31gNfg/hqdefault.jpg",
           "audio": "/music/Sole%20Space/Sole%20Space%20-%20party%20night..mp3"
-        },
-        {
-          "name": "honey nap.",
-          "picture": "https://i.ytimg.com/vi/y2JzgMf8ZRk/hqdefault.jpg",
-          "audio": "/music/Sole%20Space/Sole%20Space%20-%20honey%20nap..mp3"
-        },
-        {
-          "name": "vanilla milk.",
-          "picture": "https://i.ytimg.com/vi/FqJy0d__eNg/hqdefault.jpg",
-          "audio": "/music/Sole%20Space/Sole%20Space%20-%20vanilla%20milk..mp3"
-        },
-        {
-          "name": "grape fruit.",
-          "picture": "https://i.ytimg.com/vi/_csUOtgNVp8/hqdefault.jpg",
-          "audio": "/music/Sole%20Space/Sole%20Space%20-%20grape%20fruit..mp3"
-        },
-        {
-          "name": "comical cat.",
-          "picture": "https://i.ytimg.com/vi/DzBNVc0J_U8/hqdefault.jpg",
-          "audio": "/music/Sole%20Space/Sole%20Space%20-%20comical%20cat..mp3"
         }
       ]
     },
