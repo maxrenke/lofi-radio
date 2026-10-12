@@ -776,6 +776,91 @@
           "audio": "/music/Neptune%20Square/Neptune%20Square%20%281%20Hour%20Loop%29.mp3"
         }
       ]
+    },
+    {
+      "name": "Lawrence",
+      "stations": [
+        {
+          "name": "23 (acoustic-ish)",
+          "picture": "https://i.ytimg.com/vi/Am2Ez7-4KMw/hqdefault.jpg",
+          "audio": "/music/Lawrence/Lawrence%20-%2023%20%28acoustic-ish%29.mp3"
+        },
+        {
+          "name": "Casualty (Acoustic Video feat. Jon Bellion)",
+          "picture": "https://i.ytimg.com/vi/iBxOHm5mNyE/hqdefault.jpg",
+          "audio": "/music/Lawrence/Lawrence%20-%20%EF%BC%82Casualty%EF%BC%82%20%28Acoustic%20Video%20feat.%20Jon%20Bellion%29.mp3"
+        },
+        {
+          "name": "Don't Lose Sight (Acoustic)",
+          "picture": "https://i.ytimg.com/vi/C01nBm6vV5c/hqdefault.jpg",
+          "audio": "/music/Lawrence/Lawrence%20-%20Don%27t%20Lose%20Sight%20%28Acoustic%29.mp3"
+        },
+        {
+          "name": "Freckles (Acoustic) feat. Huntertones & Jon Bellion",
+          "picture": "https://i.ytimg.com/vi/znXg75Kx73U/hqdefault.jpg",
+          "audio": "/music/Lawrence/Lawrence%20-%20Freckles%20%28Acoustic%29%20feat.%20%40Huntertones%20%26%20%40jonbellion.mp3"
+        },
+        {
+          "name": "Guy I Used To Be (acoustic-ish)",
+          "picture": "https://i.ytimg.com/vi/85ewvhgV700/hqdefault.jpg",
+          "audio": "/music/Lawrence/Lawrence%20-%20Guy%20I%20Used%20To%20Be%20%28acoustic-ish%29.mp3"
+        },
+        {
+          "name": "i'm confident that i'm insecure (acoustic-ish)",
+          "picture": "https://i.ytimg.com/vi/Ct65mJmHQnw/hqdefault.jpg",
+          "audio": "/music/Lawrence/Lawrence%20-%20i%E2%80%99m%20confident%20that%20i%E2%80%99m%20insecure%20%28acoustic-ish%29.mp3"
+        },
+        {
+          "name": "It's Not All About You (Acoustic Video feat. Jon Bellion)",
+          "picture": "https://i.ytimg.com/vi/6AAoDchHWz8/hqdefault.jpg",
+          "audio": "/music/Lawrence/Lawrence%20-%20%EF%BC%82It%27s%20Not%20All%20About%20You%EF%BC%82%20%28Acoustic%20Video%20feat.%20Jon%20Bellion%29.mp3"
+        },
+        {
+          "name": "The Weather (Acoustic & Gospel Reprise)",
+          "picture": "https://i.ytimg.com/vi/M9TYHOARDFI/hqdefault.jpg",
+          "audio": "/music/Lawrence/Lawrence%20-%20The%20Weather%20%28Acoustic%20%26%20Gospel%20Reprise%29.mp3"
+        },
+        {
+          "name": "Tryna Be Cool (acoustic-ish) feat. Hi-Lo Jack",
+          "picture": "https://i.ytimg.com/vi/CcpWZ2TGmM8/hqdefault.jpg",
+          "audio": "/music/Lawrence/Lawrence%20-%20Tryna%20Be%20Cool%20%28acoustic-ish%29%20feat.%20Hi-Lo%20Jack.mp3"
+        },
+        {
+          "name": "My First Real Love (acoustic-ish) feat. Jonathan Groff",
+          "picture": "https://i.ytimg.com/vi/jjiFd9T44j0/hqdefault.jpg",
+          "audio": "/music/Lawrence/Lawrence%20-%20My%20First%20Real%20Love%20%28acoustic-ish%29%20feat.%20Jonathan%20Groff.mp3"
+        },
+        {
+          "name": "Something In The Water (acoustic-ish)",
+          "picture": "https://i.ytimg.com/vi/HuzQwix30To/hqdefault.jpg",
+          "audio": "/music/Lawrence/Lawrence%20-%20Something%20In%20The%20Water%20%28acoustic-ish%29.mp3"
+        },
+        {
+          "name": "Whatcha Want (acoustic-ish)",
+          "picture": "https://i.ytimg.com/vi/YwozDusaQxs/hqdefault.jpg",
+          "audio": "/music/Lawrence/Lawrence%20-%20Whatcha%20Want%20%28acoustic-ish%29.mp3"
+        },
+        {
+          "name": "Rain Check feat. Quinn XCII (Stripped Down)",
+          "picture": "https://i.ytimg.com/vi/d0aWNgj2GtI/hqdefault.jpg",
+          "audio": "/music/Lawrence/Lawrence%20-%20Rain%20Check%20feat.%20Quinn%20XCII%20%28Stripped%20Down%29.mp3"
+        },
+        {
+          "name": "Tempted (Acoustic Session) - Breakfast Unscrambled",
+          "picture": "https://i.ytimg.com/vi/xyMRfNf1WWA/hqdefault.jpg",
+          "audio": "/music/Lawrence/Lawrence%20-%20Tempted%20%28Acoustic%20Session%29%20-%20Breakfast%20Unscrambled.mp3"
+        },
+        {
+          "name": "Misty Morning (Acoustic Session) - Breakfast Unscrambled",
+          "picture": "https://i.ytimg.com/vi/EEjeTS3_RzM/hqdefault.jpg",
+          "audio": "/music/Lawrence/Lawrence%20-%20Misty%20Morning%20%28Acoustic%20Session%29%20-%20Breakfast%20Unscrambled.mp3"
+        },
+        {
+          "name": "Shot (Acoustic Session) - Breakfast Unscrambled",
+          "picture": "https://i.ytimg.com/vi/mkVClmB1V4Q/hqdefault.jpg",
+          "audio": "/music/Lawrence/Lawrence%20-%20Shot%20%28Acoustic%20Session%29%20-%20Breakfast%20Unscrambled.mp3"
+        }
+      ]
     }
   ]
 }
