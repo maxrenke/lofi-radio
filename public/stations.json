@@ -115,6 +115,11 @@
           "audio": "/music/FantasyLofi/World%20of%20Warcraft%20but%20it%27s%20lofi%20beats%20~%20Vol.%201.mp3"
         },
         {
+          "name": "One Hour of Rain (World of Warcraft: Forever)",
+          "picture": "https://i.ytimg.com/vi/0LeB4u9Zexs/hqdefault.jpg",
+          "audio": "/music/World%20of%20Warcraft/World%20of%20Warcraft%20-%20One%20Hour%20of%20Rain%20%28Forever%29.mp3"
+        },
+        {
           "name": "Halo Lofi",
           "picture": "https://i.ytimg.com/vi/Cwoo7SisSHc/hqdefault.jpg",
           "audio": "/music/FantasyLofi/Halo%20but%20it%27s%20lofi%20beats.mp3"
@@ -711,59 +716,59 @@
           "audio": "/music/Sole%20Space/Sole%20Space%20-%20apple%20juice..mp3"
         },
         {
-          "name": "maple street.",
-          "picture": "https://i.ytimg.com/vi/xxaQ-AsZWmI/hqdefault.jpg",
-          "audio": "/music/Sole%20Space/Sole%20Space%20-%20maple%20street..mp3"
+          "name": "camptime.",
+          "picture": "https://i.ytimg.com/vi/GNRwiNe13hE/hqdefault.jpg",
+          "audio": "/music/Sole%20Space/Sole%20Space%20-%20camptime..mp3"
         },
         {
-          "name": "ghost club.",
-          "picture": "https://i.ytimg.com/vi/bR38g6E4xfQ/hqdefault.jpg",
-          "audio": "/music/Sole%20Space/Sole%20Space%20-%20ghost%20club..mp3"
+          "name": "coffee break.",
+          "picture": "https://i.ytimg.com/vi/ynWquPeRrT4/hqdefault.jpg",
+          "audio": "/music/Sole%20Space/Sole%20Space%20-%20coffee%20break..mp3"
         },
         {
-          "name": "fuzzy chords.",
-          "picture": "https://i.ytimg.com/vi/L-PkxUe1zrA/hqdefault.jpg",
-          "audio": "/music/Sole%20Space/Sole%20Space%20-%20fuzzy%20chords..mp3"
+          "name": "golden eyes.",
+          "picture": "https://i.ytimg.com/vi/lCQ_IlJ31ko/hqdefault.jpg",
+          "audio": "/music/Sole%20Space/Sole%20Space%20-%20golden%20eyes..mp3"
         },
         {
-          "name": "reader mode.",
-          "picture": "https://i.ytimg.com/vi/EPiAGnbqals/hqdefault.jpg",
-          "audio": "/music/Sole%20Space/Sole%20Space%20-%20reader%20mode..mp3"
+          "name": "silly scarf.",
+          "picture": "https://i.ytimg.com/vi/NHD0CTqOfZg/hqdefault.jpg",
+          "audio": "/music/Sole%20Space/Sole%20Space%20-%20silly%20scarf..mp3"
         },
         {
-          "name": "spooky files.",
-          "picture": "https://i.ytimg.com/vi/goOFIrR1j6Y/hqdefault.jpg",
-          "audio": "/music/Sole%20Space/Sole%20Space%20-%20spooky%20files..mp3"
+          "name": "brown bread.",
+          "picture": "https://i.ytimg.com/vi/OMV1FntdZMQ/hqdefault.jpg",
+          "audio": "/music/Sole%20Space/Sole%20Space%20-%20brown%20bread..mp3"
         },
         {
-          "name": "outer space.",
-          "picture": "https://i.ytimg.com/vi/PcqNyCm5h0Q/hqdefault.jpg",
-          "audio": "/music/Sole%20Space/Sole%20Space%20-%20outer%20space..mp3"
+          "name": "pumpkin head.",
+          "picture": "https://i.ytimg.com/vi/uEi0EqnZ0Tw/hqdefault.jpg",
+          "audio": "/music/Sole%20Space/Sole%20Space%20-%20pumpkin%20head..mp3"
         },
         {
-          "name": "blue claw.",
-          "picture": "https://i.ytimg.com/vi/Slcxg81Mzls/hqdefault.jpg",
-          "audio": "/music/Sole%20Space/Sole%20Space%20-%20blue%20claw..mp3"
+          "name": "yin yang.",
+          "picture": "https://i.ytimg.com/vi/n3MhF0VzJyc/hqdefault.jpg",
+          "audio": "/music/Sole%20Space/Sole%20Space%20-%20yin%20yang..mp3"
         },
         {
-          "name": "fuzzy lime.",
-          "picture": "https://i.ytimg.com/vi/R2XyYFuRD6s/hqdefault.jpg",
-          "audio": "/music/Sole%20Space/Sole%20Space%20-%20fuzzy%20lime..mp3"
+          "name": "cat invasion.",
+          "picture": "https://i.ytimg.com/vi/qo4tN9Np0vw/hqdefault.jpg",
+          "audio": "/music/Sole%20Space/Sole%20Space%20-%20cat%20invasion..mp3"
         },
         {
-          "name": "fly away.",
-          "picture": "https://i.ytimg.com/vi/PkqseQn-KU0/hqdefault.jpg",
-          "audio": "/music/Sole%20Space/Sole%20Space%20-%20fly%20away..mp3"
+          "name": "meowbrine.",
+          "picture": "https://i.ytimg.com/vi/YabsMqDsV6A/hqdefault.jpg",
+          "audio": "/music/Sole%20Space/Sole%20Space%20-%20meowbrine..mp3"
         },
         {
-          "name": "purrple phase.",
-          "picture": "https://i.ytimg.com/vi/R3EA7sNynvE/hqdefault.jpg",
-          "audio": "/music/Sole%20Space/Sole%20Space%20-%20purrple%20phase..mp3"
+          "name": "black magic.",
+          "picture": "https://i.ytimg.com/vi/xnfFhFEq9y8/hqdefault.jpg",
+          "audio": "/music/Sole%20Space/Sole%20Space%20-%20black%20magic..mp3"
         },
         {
-          "name": "party night.",
-          "picture": "https://i.ytimg.com/vi/sCAcX31gNfg/hqdefault.jpg",
-          "audio": "/music/Sole%20Space/Sole%20Space%20-%20party%20night..mp3"
+          "name": "wrong turn.",
+          "picture": "https://i.ytimg.com/vi/0ZGRGSYLe-c/hqdefault.jpg",
+          "audio": "/music/Sole%20Space/Sole%20Space%20-%20wrong%20turn..mp3"
         }
       ]
     },
