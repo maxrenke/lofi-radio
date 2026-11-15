@@ -773,16 +773,6 @@
       ]
     },
     {
-      "name": "Neptune Square",
-      "stations": [
-        {
-          "name": "Neptune Square (1 Hour Loop)",
-          "picture": "neptune-square.jpg",
-          "audio": "/music/Neptune%20Square/Neptune%20Square%20%281%20Hour%20Loop%29.mp3"
-        }
-      ]
-    },
-    {
       "name": "Lawrence",
       "stations": [
         {
@@ -864,6 +854,26 @@
           "name": "Shot (Acoustic Session) - Breakfast Unscrambled",
           "picture": "https://i.ytimg.com/vi/mkVClmB1V4Q/hqdefault.jpg",
           "audio": "/music/Lawrence/Lawrence%20-%20Shot%20%28Acoustic%20Session%29%20-%20Breakfast%20Unscrambled.mp3"
+        }
+      ]
+    },
+    {
+      "name": "Memes / TikTok",
+      "stations": [
+        {
+          "name": "SpongeBob SquarePants (1 Hour Loop)",
+          "picture": "spongebob-squarepants.jpg",
+          "audio": "/music/Memes-TikTok/SpongeBob%20SquarePants%20%281%20Hour%20Loop%29.mp3"
+        },
+        {
+          "name": "Babydoll Guitar (1 Hour Loop)",
+          "picture": "babydoll-guitar.jpg",
+          "audio": "/music/Memes-TikTok/Babydoll%20Guitar%20%281%20Hour%20Loop%29.mp3"
+        },
+        {
+          "name": "Neptune Square (1 Hour Loop)",
+          "picture": "neptune-square.jpg",
+          "audio": "/music/Neptune%20Square/Neptune%20Square%20%281%20Hour%20Loop%29.mp3"
         }
       ]
     }
