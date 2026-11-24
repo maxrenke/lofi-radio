@@ -861,6 +861,11 @@
       "name": "Memes / TikTok",
       "stations": [
         {
+          "name": "Camera Roll 2026-11-24 (1 Hour Loop)",
+          "picture": "camera-roll-1124.jpg",
+          "audio": "/music/Memes-TikTok/Camera%20Roll%202026-11-24%20%281%20Hour%20Loop%29.mp3"
+        },
+        {
           "name": "Babydoll Guitar (1 Hour Loop)",
           "picture": "babydoll-guitar.jpg",
           "audio": "/music/Memes-TikTok/Babydoll%20Guitar%20%281%20Hour%20Loop%29.mp3"
